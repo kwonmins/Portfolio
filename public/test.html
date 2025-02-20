@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>귀엽고 멋진 포트폴리오</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: #f8f9fa;
+      }
+      .hero {
+        background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+        color: white;
+        text-align: center;
+        padding: 80px 20px;
+        border-radius: 20px;
+        margin: 20px;
+      }
+      .profile-img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 5px solid white;
+      }
+      .card {
+        transition: 0.3s;
+        border-radius: 15px;
+      }
+      .card:hover {
+        transform: scale(1.05);
+      }
+      .btn-custom {
+        background-color: #ff758c;
+        border: none;
+        color: white;
+      }
+      .btn-custom:hover {
+        background-color: #ff5c72;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="#">My Portfolio</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="#about">소개</a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="#projects">프로젝트</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contact">연락처</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="hero">
+      <img
+        src="https://via.placeholder.com/150"
+        alt="Profile"
+        class="profile-img"
+      />
+      <h1 class="mt-3">안녕하세요! 홍길동입니다.</h1>
+      <p>프론트엔드 개발자 & 디자이너</p>
+    </div>
+
+    <div class="container mt-5" id="projects">
+      <h2 class="text-center mb-4">프로젝트</h2>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card shadow-sm">
+            <img
+              src="https://via.placeholder.com/350x200"
+              class="card-img-top"
+              alt="Project 1"
+            />
+            <div class="card-body text-center">
+              <h5 class="card-title">프로젝트 1</h5>
+              <p class="card-text">설명 텍스트...</p>
+              <a href="#" class="btn btn-custom">자세히 보기</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card shadow-sm">
+            <img
+              src="https://via.placeholder.com/350x200"
+              class="card-img-top"
+              alt="Project 2"
+            />
+            <div class="card-body text-center">
+              <h5 class="card-title">프로젝트 2</h5>
+              <p class="card-text">설명 텍스트...</p>
+              <a href="#" class="btn btn-custom">자세히 보기</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card shadow-sm">
+            <img
+              src="https://via.placeholder.com/350x200"
+              class="card-img-top"
+              alt="Project 3"
+            />
+            <div class="card-body text-center">
+              <h5 class="card-title">프로젝트 3</h5>
+              <p class="card-text">설명 텍스트...</p>
+              <a href="#" class="btn btn-custom">자세히 보기</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="text-center py-4 mt-5 bg-light" id="contact">
+      <p>&copy; 2025 홍길동. All Rights Reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

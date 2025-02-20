@@ -1,0 +1,182 @@
+body {
+  font-family: "Arial", sans-serif;
+  color: #222;
+  background-color: #fdfdfd;
+  margin: 10;
+  padding: 20px;
+  padding-top: 100px; /* 네비게이션 바와 컨테이너 사이 간격 증가 */
+}
+.navbar {
+  background-color: #ffffff;
+  border-bottom: 2px solid #ddd;
+}
+.navbar-brand {
+  font-weight: bold;
+}
+.container {
+  max-width: 1100px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.sidebar {
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-bottom: 2px solid #000;
+  padding-bottom: 20px;
+  background: #f8f9fa; /* 약간의 배경색 추가 */
+  border-radius: 10px; /* 부드러운 모서리 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 효과 */
+  padding: 30px;
+  width: 100%;
+  text-align: center;
+}
+
+.info {
+  text-align: center;
+  font-family: "Poppins", sans-serif; /* 세련된 폰트 적용 */
+  font-weight: 400;
+  color: #333; /* 글씨 색상을 어두운 회색으로 */
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 5px;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.info p {
+  font-size: 1rem;
+  color: #444;
+  margin: 5px 0;
+}
+
+.info a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease-in-out;
+}
+
+.info a:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+.profile-img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.info {
+  text-align: center;
+  margin-top: 10px;
+}
+.title {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+.subtitle {
+  font-size: 1rem;
+  color: #555;
+  margin-top: 5px;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.section-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #000;
+  display: inline-block;
+  padding-bottom: 5px;
+}
+.list-container {
+  width: 100%;
+  height: 150px;
+  overflow: hidden;
+  background: #fdfdfd;
+  position: relative;
+}
+.list-content {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  animation: listScroll 10s linear infinite;
+}
+@keyframes listScroll {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+@media (min-width: 768px) {
+  .container {
+    flex-direction: row;
+    gap: 50px;
+  }
+  .sidebar {
+    width: 30%;
+    border-right: 2px solid #000;
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .content {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+}
+/* 네비게이션 바 기본 스타일 */
+.navbar {
+  background-color: #ffffff;
+  border-bottom: 2px solid #ddd;
+  position: fixed;
+  top: -80px; /* 처음에는 화면 밖에 숨겨둠 */
+  width: 100%;
+  transition: top 0.6s ease-in-out, background-color 0.3s ease-in-out,
+    box-shadow 0.3s ease-in-out;
+  z-index: 1000;
+}
+
+/* 스크롤 시 네비게이션 바 스타일 변경 */
+.navbar.scrolled {
+  top: 0;
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 네비게이션 항목 효과 */
+.nav-link {
+  transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+.nav-link:hover {
+  color: #000;
+  transform: scale(1.1);
+}
+
+/* 모바일 햄버거 버튼 애니메이션 */
+.navbar-toggler {
+  transition: transform 0.3s ease-in-out;
+}
+.navbar-toggler:focus {
+  transform: rotate(90deg);
+}
