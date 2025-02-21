@@ -3,6 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%-meta%>
+
     <title>권민성 - 포트폴리오</title>
     <!-- Bootstrap CSS -->
     <link
@@ -11,11 +13,13 @@
     />
     <!-- Custom CSS -->
     <link rel="stylesheet" href="card.css" />
+    <%-style%>
+
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light">
       <div class="container">
-        <a class="navbar-brand" href="#">권민성 포트폴리오</a>
+        <a class="navbar-brand" href="/">권민성 포트폴리오</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -26,25 +30,29 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="nav-link" href="#about">소개</a></li>
+            <li class="nav-item"><a class="nav-link" href="about">소개</a></li>
             <li class="nav-item">
-              <a class="nav-link" href="#projects">프로젝트 보기</a>
+              <a class="nav-link" href="project">프로젝트 보기</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#career">경력</a>
+              <a class="nav-link" href="career">경력</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#awards">수상 내역</a>
+              <a class="nav-link" href="award">수상 내역</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#license">자격증</a>
+              <a class="nav-link" href="license">자격증</a>
             </li>
           </ul>
         </div>
       </div>
     </nav>
-  </body>
+    <%-body%>
+
+    
 </html>
+
+
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {

@@ -2,23 +2,26 @@ var express = require("express");
 var router = express.Router();
 
 /* GET home page. */
-router.get("/", async (req, res, next) => {
+router.get("/", function (req, res, next) {
   res.render("card", { title: "Express" });
 });
 
-/* GET h. */
-router.get("/index", async (req, res, next) => {
-  res.render("index", { title: "Express" });
+/* GET home page. */
+router.get("/award", function (req, res, next) {
+  res.render("award", { title: "Express" });
 });
 
-/* GET home page. */
-router.get("/", async (req, res, next) => {
-  res.render("index", { title: "Express" });
+router.get("/about", function (req, res, next) {
+  res.render("about", { title: "Express" });
 });
-
-/* GET home page. */
-router.get("/", async (req, res, next) => {
-  res.render("index", { title: "Express" });
+router.get("/license", function (req, res, next) {
+  res.render("license", { title: "Express" });
+});
+router.get("/career", function (req, res, next) {
+  res.render("career", { title: "Express" });
+});
+router.get("/project", function (req, res, next) {
+  res.render("project", { title: "Express" });
 });
 
 module.exports = router;
