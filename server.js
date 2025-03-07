@@ -61,3 +61,20 @@ app.use("/", indexRouter); // 기본 라우터 등록
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);
 });
+
+app.get("/track", (req, res) => {
+  const ip =
+    req.headers["x-forwarded-for"]?.split(",")[0] ||
+    req.connection.remoteAddress;
+
+  if (!visitors[ip]) {
+    visitors[ip] = { count: 0, lastVisit: new Date().toISOString() };
+  }
+
+  visitors[ip].count += 1;
+  visitors[ip].lastVisit = new Date().toISOString();
+
+  fs.writeFileSync(logFile, JSON.stringify(visitors, null, 2));
+
+  res.json({ message: "Tracking success", ip, count: visitors[ip].count });
+});

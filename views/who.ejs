@@ -5,8 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= title %></title>
     <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        text-align: center;
+      }
       table {
-        width: 100%;
+        width: 80%;
+        margin: auto;
         border-collapse: collapse;
       }
       th,
@@ -19,9 +25,42 @@
         background-color: #f2f2f2;
       }
     </style>
+    <script>
+      // 방문자 통계를 가져와서 테이블을 업데이트하는 함수
+      async function fetchStats() {
+        try {
+          const response = await fetch("/stats");
+          const data = await response.json();
+          const tableBody = document.getElementById("visitorTableBody");
+          tableBody.innerHTML = "";
+
+          if (Object.keys(data).length === 0) {
+            tableBody.innerHTML = `<tr><td colspan="3">방문 기록이 없습니다.</td></tr>`;
+            return;
+          }
+
+          Object.keys(data).forEach((ip) => {
+            const row = `<tr>
+                                    <td>${ip}</td>
+                                    <td>${data[ip].count}</td>
+                                    <td>${new Date(
+                                      data[ip].lastVisit
+                                    ).toLocaleString()}</td>
+                                </tr>`;
+            tableBody.innerHTML += row;
+          });
+        } catch (error) {
+          console.error("방문자 데이터를 불러오는 중 오류 발생:", error);
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", fetchStats);
+    </script>
   </head>
   <body>
     <h1><%= title %></h1>
+    <p>이 페이지는 방문자의 IP와 방문 횟수를 기록하고 표시합니다.</p>
+
     <table>
       <thead>
         <tr>
@@ -30,18 +69,8 @@
           <th>마지막 방문</th>
         </tr>
       </thead>
-      <tbody>
-        <% if (!visitors || Object.keys(visitors).length === 0) { %>
-        <tr>
-          <td colspan="3">방문 기록이 없습니다.</td>
-        </tr>
-        <% } else { %> <% Object.keys(visitors).forEach(ip => { %>
-        <tr>
-          <td><%= ip %></td>
-          <td><%= visitors[ip].count %></td>
-          <td><%= new Date(visitors[ip].lastVisit).toLocaleString() %></td>
-        </tr>
-        <% }); %> <% } %>
+      <tbody id="visitorTableBody">
+        <!-- 방문 기록이 여기에 표시됨 -->
       </tbody>
     </table>
   </body>
