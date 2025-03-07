@@ -13,6 +13,13 @@ var app = express();
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
+// 📌 미들웨어 설정
+app.use(logger("dev")); // HTTP 요청 로그 기록
+app.use(express.json()); // JSON 요청 처리
+app.use(express.urlencoded({ extended: false })); // URL-encoded 데이터 처리
+app.use(cookieParser()); // 쿠키 파싱
+app.use(express.static(path.join(__dirname, "public"))); // 정적 파일 제공
+
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

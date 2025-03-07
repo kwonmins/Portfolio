@@ -1,0 +1,5 @@
+::1 GET / 404 2.426 ms
+::1 GET /track 200 5.884 ms
+::1 GET /recent 200 1.748 ms
+::1 GET /stats 200 1.003 ms
+::1 GET / 404 1.300 ms

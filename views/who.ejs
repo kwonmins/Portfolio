@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <style>
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: center;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+    </style>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <table>
+      <thead>
+        <tr>
+          <th>IP 주소</th>
+          <th>방문 횟수</th>
+          <th>마지막 방문</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (!visitors || Object.keys(visitors).length === 0) { %>
+        <tr>
+          <td colspan="3">방문 기록이 없습니다.</td>
+        </tr>
+        <% } else { %> <% Object.keys(visitors).forEach(ip => { %>
+        <tr>
+          <td><%= ip %></td>
+          <td><%= visitors[ip].count %></td>
+          <td><%= new Date(visitors[ip].lastVisit).toLocaleString() %></td>
+        </tr>
+        <% }); %> <% } %>
+      </tbody>
+    </table>
+  </body>
+</html>
