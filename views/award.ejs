@@ -28,8 +28,101 @@
     </div>
   </nav>
 
-  <div class="container">
-    <h1>수상 내역</h1>
-    <p>여기에 수상 내역 리스트가 들어감...</p>
+  <style>
+    .card-img-top {
+      height: 200px; /* 카드 내부 이미지 크기 동일하게 */
+      object-fit: cover;
+      width: 100%;
+    }
+
+    .award-gallery {
+      margin-top: 2rem; /* 수상 내역과 사진 갤러리 간격 추가 */
+    }
+
+    .award-gallery img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      margin: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .award-gallery img:hover {
+      transform: scale(1.1);
+    }
+  </style>
+
+  <h1 class="text-center mb-4">🏆 수상내역</h1>
+
+  <div class="row row-cols-1 row-cols-md-4 g-4">
+    <!-- 수상 내역 1 -->
+    <div class="col">
+      <div class="card mb-4">
+        <img
+          src="/images/award1.png"
+          class="card-img-top"
+          alt="해커톤 1위 수상"
+          data-bs-toggle="modal"
+          data-bs-target="#awardModal1"
+        />
+        <div class="card-body">
+          <h5 class="card-title">해커톤 1위</h5>
+          <p class="card-text">전기차 가격 예측 해커톤 우승</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 수상 내역 2 -->
+    <div class="col">
+      <div class="card mb-4">
+        <img
+          src="/images/award2.png"
+          class="card-img-top"
+          alt="데이터 분석 대회 수상"
+          data-bs-toggle="modal"
+          data-bs-target="#awardModal2"
+        />
+        <div class="card-body">
+          <h5 class="card-title">스마트그리드 포스터연구</h5>
+          <p class="card-text">한국전력거래소상</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 수상 내역 3 -->
+    <div class="col">
+      <div class="card mb-4">
+        <img
+          src="/images/award3.jpg"
+          class="card-img-top"
+          alt="경험 프로젝트"
+          data-bs-toggle="modal"
+          data-bs-target="#awardModal3"
+        />
+        <div class="card-body">
+          <h5 class="card-title">경험 프로젝트</h5>
+          <p class="card-text">동계 경험 프로젝트 최우수상</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 수상 내역 4 -->
+    <div class="col">
+      <div class="card mb-4">
+        <img
+          src="/images/award4.jpg"
+          class="card-img-top"
+          alt="하계 SW프로그래밍"
+          data-bs-toggle="modal"
+          data-bs-target="#awardModal4"
+        />
+        <div class="card-body">
+          <h5 class="card-title">하계 SW프로그래밍</h5>
+          <p class="card-text">SW프로그래밍 우수상</p>
+        </div>
+      </div>
+    </div>
   </div>
 </body>

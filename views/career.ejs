@@ -28,8 +28,92 @@
     </div>
   </nav>
 
-  <div class="container">
-    <h1>수상 내역</h1>
-    <p>여기에 수상 내역 리스트가 들어감...</p>
+  <style>
+    /* 경력 제목을 한 줄로 정렬 */
+    .career-title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+      gap: 10px; /* 아이콘과 텍스트 간격 */
+    }
+
+    .career-title img {
+      width: 40px;
+      height: 40px;
+    }
+
+    /* 카드 크기 통일 */
+    .card {
+      min-height: 300px; /* 모든 카드 높이 동일하게 설정 */
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-img-top {
+      height: 160px; /* 이미지 크기 동일하게 설정 */
+      object-fit: cover;
+      width: 100%;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+
+    .card-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between; /* 텍스트가 적어도 카드 크기 유지 */
+    }
+  </style>
+
+<h1 class="text-center mb-4">💼 경력</h1>
+
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+      <!-- 경력 1 -->
+      <div class="col">
+        <div class="card">
+          <img src="/images/carrer.jpg" class="card-img-top" alt="교육봉사" />
+          <div class="card-body">
+            <h5 class="card-title">늘푸른교실 교육봉사</h5>
+            <p class="card-text">고등 수학 과학 담당</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 경력 2 -->
+      <div class="col">
+        <div class="card">
+          <img src="/images/carrer2.jpg" class="card-img-top" alt="서포터즈" />
+          <div class="card-body">
+            <h5 class="card-title">하이트진로 서포터즈</h5>
+            <p class="card-text">한국전력거래소상</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 경력 3 -->
+      <div class="col">
+        <div class="card">
+          <img src="/images/carrer3.jpg" class="card-img-top" alt="인턴" />
+          <div class="card-body">
+            <h5 class="card-title">[더비전] 하계 인턴</h5>
+            <p class="card-text">시스템회사 인턴</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 경력 4 (LG AIMERS) -->
+      <div class="col">
+        <div class="card">
+          <img src="/images/carrer4.png" class="card-img-top" alt="LG AIMERS" />
+          <div class="card-body">
+            <h5 class="card-title">LG AIMERS 수료</h5>
+            <p class="card-text">난임예측모델</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </body>
