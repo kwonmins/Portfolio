@@ -1,43 +1,70 @@
-var express = require("express");
-var router = express.Router();
-var fs = require("fs");
-var path = require("path");
+const express = require("express");
+const fs = require("fs");
+const path = require("path");
+const router = express.Router();
 
-// 방문 기록 파일 경로
-const logFile = path.join(__dirname, "../visitors.json");
+// 📌 방문자 추적 API
+router.get("/track", (req, res) => {
+  let visitors = req.app.locals.visitors; // ✅ server.js에서 저장된 visitors 불러오기
 
-// 방문 기록 불러오기
-let visitors = {};
-if (fs.existsSync(logFile)) {
-  visitors = JSON.parse(fs.readFileSync(logFile, "utf8"));
-}
+  if (!visitors) {
+    console.error("🚨 visitors 객체가 정의되지 않음!");
+    req.app.locals.visitors = {}; // ✅ visitors가 없으면 빈 객체로 초기화
+    visitors = req.app.locals.visitors;
+  }
 
-/* GET home page. */
-router.get("/", function (req, res, next) {
-  res.render("card", { title: "Express" });
-});
+  const ip =
+    req.headers["x-forwarded-for"]?.split(",")[0] || req.socket.remoteAddress;
 
-/* GET home page. */
-router.get("/award", function (req, res, next) {
-  res.render("award", { title: "Express" });
-});
+  if (!visitors[ip]) {
+    visitors[ip] = { count: 0, lastVisit: new Date().toISOString() };
+  }
 
-router.get("/about", function (req, res, next) {
-  res.render("about", { title: "Express" });
-});
-router.get("/license", function (req, res, next) {
-  res.render("license", { title: "Express" });
-});
-router.get("/career", function (req, res, next) {
-  res.render("career", { title: "Express" });
-});
-router.get("/project", function (req, res, next) {
-  res.render("project", { title: "Express" });
+  visitors[ip].count += 1;
+  visitors[ip].lastVisit = new Date().toISOString();
+
+  // JSON 파일에 방문 기록 저장 (서버 재시작 후에도 유지)
+  const logFile = path.join(__dirname, "../visitors.json");
+  fs.writeFileSync(logFile, JSON.stringify(visitors, null, 2));
+
+  res.json({ message: "Tracking success", ip, count: visitors[ip].count });
 });
 
 /* 방문 기록 페이지 */
-router.get("/who", function (req, res, next) {
-  res.render("who", { title: "방문자 통계", visitors: visitors || {} });
+router.get("/who", function (req, res) {
+  let visitors = req.app.locals.visitors;
+
+  if (!visitors) {
+    console.error("🚨 visitors 객체가 정의되지 않음!");
+    req.app.locals.visitors = {}; // ✅ visitors가 없으면 빈 객체로 초기화
+    visitors = req.app.locals.visitors;
+  }
+
+  res.render("who", { title: "방문자 통계", visitors });
+});
+// ✅ 기존 라우트 유지
+router.get("/", function (req, res) {
+  res.render("card", { title: "Express" });
+});
+
+router.get("/award", function (req, res) {
+  res.render("award", { title: "Express" });
+});
+
+router.get("/about", function (req, res) {
+  res.render("about", { title: "Express" });
+});
+
+router.get("/license", function (req, res) {
+  res.render("license", { title: "Express" });
+});
+
+router.get("/career", function (req, res) {
+  res.render("career", { title: "Express" });
+});
+
+router.get("/project", function (req, res) {
+  res.render("project", { title: "Express" });
 });
 
 module.exports = router;

@@ -1,21 +1,18 @@
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
+const router = express.Router();
 
-const app = express();
-const PORT = 3000;
+// 📌 방문자 추적 API
+router.get("/track", (req, res) => {
+  let visitors = req.app.locals.visitors; // ✅ server.js에서 저장된 visitors 불러오기
 
-// 방문 기록 저장 파일 경로
-const logFile = path.join(__dirname, "visitors.json");
+  if (!visitors) {
+    console.error("🚨 visitors 객체가 정의되지 않음!");
+    req.app.locals.visitors = {}; // ✅ visitors가 없으면 빈 객체로 초기화
+    visitors = req.app.locals.visitors;
+  }
 
-// 방문 기록 불러오기 (파일이 없으면 빈 객체로 초기화)
-let visitors = {};
-if (fs.existsSync(logFile)) {
-  visitors = JSON.parse(fs.readFileSync(logFile, "utf8"));
-}
-
-// 📌 방문자 IP 기록 엔드포인트
-app.get("/track", (req, res) => {
   const ip =
     req.headers["x-forwarded-for"]?.split(",")[0] || req.socket.remoteAddress;
 
@@ -26,18 +23,24 @@ app.get("/track", (req, res) => {
   visitors[ip].count += 1;
   visitors[ip].lastVisit = new Date().toISOString();
 
-  // 방문 기록 JSON 파일에 저장
+  // JSON 파일에 방문 기록 저장 (서버 재시작 후에도 유지)
+  const logFile = path.join(__dirname, "../visitors.json");
   fs.writeFileSync(logFile, JSON.stringify(visitors, null, 2));
 
   res.json({ message: "Tracking success", ip, count: visitors[ip].count });
 });
 
-// 📌 방문 기록 조회 API
-app.get("/stats", (req, res) => {
-  res.json(visitors);
+/* 방문 기록 페이지 */
+router.get("/who", function (req, res) {
+  let visitors = req.app.locals.visitors;
+
+  if (!visitors) {
+    console.error("🚨 visitors 객체가 정의되지 않음!");
+    req.app.locals.visitors = {}; // ✅ visitors가 없으면 빈 객체로 초기화
+    visitors = req.app.locals.visitors;
+  }
+
+  res.render("who", { title: "방문자 통계", visitors });
 });
 
-// 📌 서버 실행
-app.listen(PORT, () => {
-  console.log(`Server is running at http://localhost:${PORT}`);
-});
+module.exports = router;
