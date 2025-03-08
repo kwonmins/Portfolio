@@ -3,13 +3,15 @@ const fs = require("fs");
 const path = require("path");
 const router = express.Router();
 
+const logFile = path.join(__dirname, "../visitors.json");
+
 // 📌 방문자 추적 API
 router.get("/track", (req, res) => {
-  let visitors = req.app.locals.visitors; // ✅ server.js에서 저장된 visitors 불러오기
+  let visitors = req.app.locals.visitors;
 
   if (!visitors) {
     console.error("🚨 visitors 객체가 정의되지 않음!");
-    req.app.locals.visitors = {}; // ✅ visitors가 없으면 빈 객체로 초기화
+    req.app.locals.visitors = {};
     visitors = req.app.locals.visitors;
   }
 
@@ -17,17 +19,29 @@ router.get("/track", (req, res) => {
     req.headers["x-forwarded-for"]?.split(",")[0] || req.socket.remoteAddress;
 
   if (!visitors[ip]) {
-    visitors[ip] = { count: 0, lastVisit: new Date().toISOString() };
+    visitors[ip] = { count: 0, lastVisit: "정보 없음" }; // ✅ 기본값 설정
   }
 
+  const nowKST = new Date().toLocaleString("ko-KR", { timeZone: "Asia/Seoul" });
+
   visitors[ip].count += 1;
-  visitors[ip].lastVisit = new Date().toISOString();
+  visitors[ip].lastVisit = nowKST;
 
-  // JSON 파일에 방문 기록 저장 (서버 재시작 후에도 유지)
-  const logFile = path.join(__dirname, "../visitors.json");
-  fs.writeFileSync(logFile, JSON.stringify(visitors, null, 2));
+  console.log(`📌 방문 기록 저장: ${nowKST} (IP: ${ip})`);
 
-  res.json({ message: "Tracking success", ip, count: visitors[ip].count });
+  // ✅ 즉시 파일 저장 (덮어쓰기 방지)
+  try {
+    fs.writeFileSync(logFile, JSON.stringify(visitors, null, 2));
+  } catch (err) {
+    console.error("🚨 visitors.json 저장 중 오류 발생:", err);
+  }
+
+  res.json({
+    message: "Tracking success",
+    ip,
+    count: visitors[ip].count,
+    lastVisit: nowKST,
+  });
 });
 
 /* 방문 기록 페이지 */
@@ -36,7 +50,7 @@ router.get("/who", function (req, res) {
 
   if (!visitors) {
     console.error("🚨 visitors 객체가 정의되지 않음!");
-    req.app.locals.visitors = {}; // ✅ visitors가 없으면 빈 객체로 초기화
+    req.app.locals.visitors = {};
     visitors = req.app.locals.visitors;
   }
 
@@ -67,4 +81,5 @@ router.get("/project", function (req, res) {
   res.render("project", { title: "Express" });
 });
 
+/* ✅ 반드시 `router`만 내보내야 함! */
 module.exports = router;

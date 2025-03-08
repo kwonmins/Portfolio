@@ -47,7 +47,10 @@
         <tr>
           <td><%= ip %></td>
           <td><%= visitors[ip].count %></td>
-          <td><%= new Date(visitors[ip].lastVisit).toLocaleString() %></td>
+          <td>
+            <% if (!visitors[ip].lastVisit || visitors[ip].lastVisit === "N/A")
+            { %> 정보 없음 <% } else { %> <%= visitors[ip].lastVisit %> <% } %>
+          </td>
         </tr>
         <% }); %> <% } %>
       </tbody>
