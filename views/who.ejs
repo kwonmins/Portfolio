@@ -2,58 +2,198 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= title %></title>
+    <title>방문자 목록</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
       body {
-        font-family: Arial, sans-serif;
-        margin: 20px;
-        text-align: center;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        padding: 20px;
       }
+      h1 {
+        margin: 0 0 12px;
+      }
+      .toolbar {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+        margin: 8px 0 16px;
+      }
+      .toolbar .count {
+        color: #666;
+      }
+      .toolbar input[type="text"] {
+        padding: 6px 10px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        min-width: 240px;
+      }
+      .toolbar button {
+        padding: 6px 12px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background: #fff;
+        cursor: pointer;
+      }
+      .toolbar button:hover {
+        background: #f7f7f7;
+      }
+
       table {
-        width: 80%;
-        margin: auto;
+        width: 100%;
         border-collapse: collapse;
       }
       th,
       td {
-        border: 1px solid black;
+        border: 1px solid #ddd;
         padding: 8px;
-        text-align: center;
+        font-size: 14px;
+        word-break: break-all;
       }
       th {
-        background-color: #f2f2f2;
+        background: #f7f7f7;
+        text-align: left;
+      }
+      tr:nth-child(even) {
+        background: #fafafa;
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 12px;
+      }
+      .btn-copy {
+        border: 1px solid #ddd;
+        background: #fff;
+        padding: 2px 6px;
+        border-radius: 6px;
+        margin-left: 6px;
+        cursor: pointer;
+      }
+      .btn-copy:hover {
+        background: #f0f0f0;
       }
     </style>
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>이 페이지는 방문자의 IP와 방문 횟수를 기록하고 표시합니다.</p>
+    <h1>방문자 IP / User-Agent</h1>
 
-    <table>
+    <div class="toolbar">
+      <span class="count"
+        >최근 200건 · 현재
+        <strong><%= (visitors && visitors.length) || 0 %></strong>건</span
+      >
+      <input id="q" type="text" placeholder="검색: IP/경로/Referer/UA" />
+      <button id="btnRefresh" type="button">새로고침</button>
+      <button id="btnClear" type="button">검색 지우기</button>
+    </div>
+
+    <table id="tbl">
       <thead>
         <tr>
-          <th>IP 주소</th>
-          <th>방문 횟수</th>
-          <th>마지막 방문</th>
+          <th>ID</th>
+          <th>시간</th>
+          <th>IP</th>
+          <th>경로</th>
+          <th>Referer</th>
+          <th>User-Agent</th>
         </tr>
       </thead>
       <tbody>
-        <% if (!visitors || Object.keys(visitors).length === 0) { %>
+        <% if (Array.isArray(visitors) && visitors.length) { %> <%
+        visitors.forEach(function(v){ %>
         <tr>
-          <td colspan="3">방문 기록이 없습니다.</td>
-        </tr>
-        <% } else { %> <% Object.keys(visitors).forEach(ip => { %>
-        <tr>
-          <td><%= ip %></td>
-          <td><%= visitors[ip].count %></td>
-          <td>
-            <% if (!visitors[ip].lastVisit || visitors[ip].lastVisit === "N/A")
-            { %> 정보 없음 <% } else { %> <%= visitors[ip].lastVisit %> <% } %>
+          <td class="mono"><%= v.id %></td>
+          <td class="mono">
+            <%= new Date(v.created_at).toLocaleString('ko-KR', { timeZone:
+            'Asia/Seoul' }) %>
           </td>
+          <td class="mono">
+            <span><%= v.ip %></span>
+            <button type="button" class="btn-copy" data-copy="<%= v.ip %>">
+              복사
+            </button>
+          </td>
+          <td class="mono"><%= v.path %></td>
+          <td class="mono"><%= v.referer || '' %></td>
+          <td class="mono"><%= v.user_agent || '' %></td>
         </tr>
-        <% }); %> <% } %>
+        <% }); %> <% } else { %>
+        <tr>
+          <td colspan="6">데이터가 없습니다.</td>
+        </tr>
+        <% } %>
       </tbody>
     </table>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var q = document.getElementById("q");
+        var btnRefresh = document.getElementById("btnRefresh");
+        var btnClear = document.getElementById("btnClear");
+
+        function showAllRows() {
+          document.querySelectorAll("#tbl tbody tr").forEach(function (tr) {
+            tr.style.display = "";
+          });
+        }
+
+        function filterTable(keyword) {
+          var kw = (keyword || "").toLowerCase().trim();
+          var rows = document.querySelectorAll("#tbl tbody tr");
+          if (!kw) {
+            showAllRows();
+            return;
+          }
+          rows.forEach(function (tr) {
+            var text = tr.textContent.toLowerCase();
+            tr.style.display = text.indexOf(kw) !== -1 ? "" : "none";
+          });
+        }
+
+        // 검색 입력 이벤트
+        if (q) {
+          q.addEventListener("input", function (e) {
+            filterTable(e.target.value);
+          });
+        }
+
+        // 새로고침
+        if (btnRefresh) {
+          btnRefresh.addEventListener("click", function () {
+            location.reload();
+          });
+        }
+
+        // 검색 지우기
+        if (btnClear) {
+          btnClear.addEventListener("click", function () {
+            if (q) {
+              q.value = "";
+              q.focus();
+            }
+            showAllRows();
+          });
+        }
+
+        // 복사 버튼(이벤트 위임)
+        document.getElementById("tbl").addEventListener("click", function (e) {
+          var btn = e.target.closest(".btn-copy");
+          if (!btn) return;
+          var text = btn.getAttribute("data-copy") || "";
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).catch(function () {});
+          } else {
+            var ta = document.createElement("textarea");
+            ta.value = text;
+            document.body.appendChild(ta);
+            ta.select();
+            try {
+              document.execCommand("copy");
+            } catch (e) {}
+            document.body.removeChild(ta);
+          }
+        });
+      });
+    </script>
   </body>
 </html>

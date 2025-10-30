@@ -1,40 +1,47 @@
-const express = require("express");
-const fs = require("fs");
-const path = require("path");
+// server.js  —  "전역 방문 로거"만 export
+const pool = require("./db");
 
-const app = express();
-const PORT = 3000;
+// 정적/헬스체크 등 제외 규칙
+const shouldLog = (req) => {
+  const p = req.path || req.originalUrl || "";
+  return !(
+    p.startsWith("/public") ||
+    p.startsWith("/assets") ||
+    p.startsWith("/css") ||
+    p.startsWith("/js") ||
+    p.startsWith("/img") ||
+    p.startsWith("/favicon") ||
+    p.startsWith("/_next") ||
+    p.startsWith("/api/health") ||
+    p.startsWith("/debug")
+  );
+};
 
-// 방문 기록 저장 파일 경로
-const logFile = path.join(__dirname, "visitors.json");
-
-// 방문 기록 불러오기 (파일이 없으면 빈 객체로 초기화)
-let visitors = {};
-if (fs.existsSync(logFile)) {
+// 전역 방문 로깅 미들웨어
+async function visitLogger(req, res, next) {
   try {
-    visitors = JSON.parse(fs.readFileSync(logFile, "utf8"));
-  } catch (err) {
-    console.error("🚨 visitors.json 파일을 읽는 중 오류 발생:", err);
-    visitors = {};
+    if (req.method === "GET" && shouldLog(req)) {
+      const xff = req.headers["x-forwarded-for"];
+      const ip =
+        (xff ? xff.split(",")[0] : "") ||
+        req.socket?.remoteAddress ||
+        req.ip ||
+        "";
+      const ua = req.get("user-agent") || "";
+      const referer = req.get("referer") || "";
+      const urlPath = req.originalUrl || req.url || "";
+
+      await pool.execute(
+        "INSERT INTO ip_visitor (ip, user_agent, path, referer) VALUES (?,?,?,?)",
+        [ip, ua, urlPath, referer]
+      );
+      // 확인용 로그 (원하면 주석 처리)
+      console.log("[visit] saved:", ip, urlPath);
+    }
+  } catch (e) {
+    console.error("[visit] insert fail:", e?.message);
   }
+  next();
 }
 
-// 📌 `visitors`가 제대로 로드되었는지 확인
-console.log("✅ 초기 visitors 데이터:", visitors);
-
-// 📌 `routes/index.js`에서 사용할 수 있도록 `app.locals.visitors`에 저장
-app.locals.visitors = visitors;
-
-// 📌 모든 요청에서 `app.locals.visitors`를 유지하도록 설정
-app.use((req, res, next) => {
-  req.app.locals.visitors = visitors;
-  next();
-});
-
-// 📌 `routes/index.js` 로드
-const indexRouter = require("./routes/index");
-app.use("/", indexRouter);
-
-app.listen(PORT, () => {
-  console.log(`✅ Server is running at http://localhost:${PORT}`);
-});
+module.exports = { visitLogger };

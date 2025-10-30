@@ -8,7 +8,8 @@ var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var expressLayouts = require("express-ejs-layouts");
 var app = express();
-
+const { visitLogger } = require("./server"); // ✅ (1) 추가
+const whoRouter = require("./routes/who");
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
@@ -19,7 +20,7 @@ app.use(express.json()); // JSON 요청 처리
 app.use(express.urlencoded({ extended: false })); // URL-encoded 데이터 처리
 app.use(cookieParser()); // 쿠키 파싱
 app.use(express.static(path.join(__dirname, "public"))); // 정적 파일 제공
-
+app.use(visitLogger);
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -31,7 +32,7 @@ app.set("layout extractScripts", true);
 app.set("layout extractStyles", true);
 app.set("layout extractMetas", true);
 app.use(expressLayouts);
-
+app.use("/who", whoRouter); // ✅ 먼저
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 

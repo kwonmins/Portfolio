@@ -9,13 +9,14 @@
     "cookie-parser": "~1.4.4",
     "dayjs": "^1.11.18",
     "debug": "~2.6.9",
-    "dotenv": "^17.2.2",
+    "dotenv": "^17.2.3",
     "ejs": "~2.6.1",
     "express": "~4.16.1",
     "express-ejs-layouts": "^2.5.1",
     "http-errors": "~1.6.3",
     "marked": "^16.2.1",
     "morgan": "~1.9.1",
+    "mysql2": "^3.15.3",
     "openai": "^5.19.1"
   }
 }
