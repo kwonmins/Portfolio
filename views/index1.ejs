@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>나의 일기</title>
+    <style>
+      :root {
+        --bg: #f7f8fb;
+        --fg: #111;
+        --card: #fff;
+        --muted: #6b7280;
+        --accent: #4f86ff;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--fg);
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR",
+          Arial, sans-serif;
+      }
+      header {
+        padding: 18px 22px;
+        border-bottom: 1px solid #e5e7eb;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      header img {
+        width: 36px;
+        height: 36px;
+      }
+      header h1 {
+        margin: 0;
+        font-size: 1.2rem;
+      }
+      .container {
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 22px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 16px;
+      }
+      .card {
+        background: var(--card);
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+        overflow: hidden;
+        min-height: 300px;
+        display: flex;
+        flex-direction: column;
+      }
+      .card-img-top {
+        height: 160px;
+        width: 100%;
+        object-fit: cover;
+        background: #000;
+      }
+      .card-body {
+        padding: 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        justify-content: space-between;
+      }
+      .muted {
+        color: var(--muted);
+      }
+      .mb-4 {
+        margin-bottom: 18px;
+      }
+      .form-card {
+        padding: 16px;
+      }
+      textarea,
+      input {
+        width: 100%;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #e5e7eb;
+        background: #fafafa;
+      }
+      button {
+        padding: 10px 14px;
+        border: 0;
+        border-radius: 10px;
+        background: var(--accent);
+        color: #fff;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .title-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 16px;
+      }
+      .title-row img {
+        width: 40px;
+        height: 40px;
+      }
+      a {
+        color: #0f59ff;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <img
+        src="/images/carrer4.png"
+        alt="logo"
+        onerror="this.style.display='none'"
+      />
+      <h1>📝 나의 일기</h1>
+    </header>
+
+    <div class="container">
+      <!-- 상단 입력 카드 -->
+      <div class="card form-card mb-4">
+        <div class="title-row">
+          <img
+            src="/images/carrer.png"
+            alt=""
+            onerror="this.style.display='none'"
+          />
+          <div style="font-size: 1.2rem; font-weight: 700">오늘 한 일 입력</div>
+        </div>
+
+        <form method="post" action="/generate">
+          <label class="muted">오늘 한 일</label>
+          <textarea
+            name="content"
+            rows="6"
+            required
+            placeholder="오늘 하루를 자유롭게 적어주세요."
+          ></textarea>
+
+          <div
+            class="grid"
+            style="
+              grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+              margin-top: 10px;
+            "
+          >
+            <div>
+              <label class="muted">오늘 기분/컨디션</label>
+              <input name="mood" placeholder="좋음 / 보통 / 피곤 ..." />
+            </div>
+            <div>
+              <label class="muted">내일 우선순위(쉼표 구분)</label>
+              <input name="tomorrow" placeholder="자료정리, 운동, 장보기 ..." />
+            </div>
+          </div>
+
+          <div
+            style="margin-top: 12px; display: flex; justify-content: flex-end"
+          >
+            <button type="submit">일기 생성</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- 하단 그리드: 최근 일기 카드 -->
+      <h2 class="mb-4">💼 최근 일기</h2>
+      <div class="grid">
+        <% if (!diaries.length) { %>
+        <div class="card" style="min-height: 140px">
+          <div class="card-body">
+            <div class="muted">아직 저장된 일기가 없습니다.</div>
+          </div>
+        </div>
+        <% } %> <% diaries.forEach(d => { %>
+        <div class="card">
+          <img
+            src="/images/carrer2.jpg"
+            class="card-img-top"
+            alt="thumb"
+            onerror="this.style.display='none'"
+          />
+          <div class="card-body">
+            <div>
+              <div style="font-weight: 700">📝 <%= d.ts %></div>
+              <div class="muted">생성된 일기</div>
+            </div>
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+              "
+            >
+              <a href="/diary/<%= d.ts %>">자세히 보기 →</a>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+  </body>
+</html>

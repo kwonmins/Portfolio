@@ -80,6 +80,12 @@ router.get("/career", function (req, res) {
 router.get("/project", function (req, res) {
   res.render("project", { title: "Express" });
 });
+router.get("/diary", function (req, res) {
+  res.render("diary", { title: "Express" });
+});
 
+router.get("/index", function (req, res) {
+  res.render("index", { title: "Express" });
+});
 /* ✅ 반드시 `router`만 내보내야 함! */
 module.exports = router;
