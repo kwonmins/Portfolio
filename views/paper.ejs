@@ -1,0 +1,82 @@
+<h1 class="text-center mb-4">📚 연구실적</h1>
+
+<style>
+  .paper-grid {
+    display: flex;
+    justify-content: flex-start; /* 왼쪽 정렬 */
+    gap: 30px;
+    flex-wrap: wrap;
+    max-width: 1000px; /* 필요시 조절 가능 */
+    margin: 0 auto;
+  }
+
+  .paper-card {
+    width: 250px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+  }
+
+  .paper-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .paper-img {
+    width: 100%;
+    height: 150px;
+    object-fit: contain; /* 이미지가 잘리지 않게 */
+    background-color: white; /* 여백 있을 경우 배경 하얗게 */
+  }
+
+  .paper-body {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+
+  .paper-title {
+    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: 5px;
+  }
+
+  .paper-meta {
+    color: #555;
+    font-size: 0.85rem;
+    margin-bottom: 5px;
+  }
+
+  .paper-desc {
+    font-size: 0.8rem;
+  }
+</style>
+
+<div class="paper-grid">
+  <!-- 논문 1 -->
+  <div class="paper-card">
+    <img src="/images/paper1.png" alt="논문1 썸네일" class="paper-img" />
+    <div class="paper-body">
+      <div class="paper-title">
+        GAN 기반 맞춤형 헤어스타일 추천 스마트미러 구현
+      </div>
+      <div class="paper-meta">한국컴퓨터정보학회 논문지 (2025)</div>
+      <div class="paper-desc">GAN을 활용한 사용자 맞춤형 스마트거울 구현</div>
+    </div>
+  </div>
+
+  <!-- 논문 2 -->
+  <div class="paper-card">
+    <img src="/images/paper2.png" alt="논문2 썸네일" class="paper-img" />
+    <div class="paper-body">
+      <div class="paper-title">
+        얼굴 분석 기반 헤어스타일 추천 시뮬레이션 시스템
+      </div>
+      <div class="paper-meta">대한전자공학회 추계학술대회 (2025)</div>
+      <div class="paper-desc">
+        CNN기반 얼굴형 분석 모델 개발 & AI 분석과 HairFastGAN합성을 이용한
+        헤어스타일 추천 시스템 개발
+      </div>
+    </div>
+  </div>
+</div>
