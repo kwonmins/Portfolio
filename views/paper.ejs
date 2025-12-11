@@ -3,20 +3,21 @@
 <style>
   .paper-grid {
     display: flex;
-    justify-content: flex-start; /* 왼쪽 정렬 */
-    gap: 30px;
+    justify-content: center; /* 중앙 정렬 */
+    gap: 40px; /* 카드 간 간격 */
     flex-wrap: wrap;
-    max-width: 1000px; /* 필요시 조절 가능 */
-    margin: 0 auto;
+    padding: 20px;
   }
 
   .paper-card {
-    width: 250px;
+    width: 280px; /* 카드 폭 확대 */
+    min-height: 380px;
     border: 1px solid #ddd;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s;
+    background-color: #fff;
   }
 
   .paper-card:hover {
@@ -25,30 +26,32 @@
 
   .paper-img {
     width: 100%;
-    height: 150px;
-    object-fit: contain; /* 이미지가 잘리지 않게 */
-    background-color: white; /* 여백 있을 경우 배경 하얗게 */
+    height: 140px;
+    object-fit: contain; /* 이미지 잘리지 않게 */
+    background-color: white;
+    padding: 5px; /* 이미지 여백 */
   }
 
   .paper-body {
-    padding: 10px;
-    font-size: 0.9rem;
+    padding: 12px;
+    font-size: 0.85rem;
   }
 
   .paper-title {
-    font-weight: bold;
-    font-size: 1rem;
+    font-weight: 600;
+    font-size: 1.05rem;
     margin-bottom: 5px;
   }
 
   .paper-meta {
-    color: #555;
+    color: #666;
     font-size: 0.85rem;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
   }
 
   .paper-desc {
     font-size: 0.8rem;
+    line-height: 1.3;
   }
 </style>
 
@@ -60,8 +63,11 @@
       <div class="paper-title">
         GAN 기반 맞춤형 헤어스타일 추천 스마트미러 구현
       </div>
-      <div class="paper-meta">한국컴퓨터정보학회 논문지 (2025)</div>
-      <div class="paper-desc">GAN을 활용한 사용자 맞춤형 스마트거울 구현</div>
+      <div class="paper-meta">한국컴퓨터정보학회 논문지 (2024)</div>
+      <div class="paper-desc">
+        GAN을 활용한 개인 맞춤형 추천 시스템을 구현하고 스마트미러와 연동한
+        연구.
+      </div>
     </div>
   </div>
 
@@ -74,8 +80,8 @@
       </div>
       <div class="paper-meta">대한전자공학회 추계학술대회 (2025)</div>
       <div class="paper-desc">
-        CNN기반 얼굴형 분석 모델 개발 & AI 분석과 HairFastGAN합성을 이용한
-        헤어스타일 추천 시스템 개발
+        얼굴 분석과 이미지 합성을 이용한 헤어스타일 시뮬레이션 및 추천 시스템
+        연구.
       </div>
     </div>
   </div>
