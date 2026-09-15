@@ -19,9 +19,7 @@ Express/EJS 포트폴리오와 Supabase 방문 통계.
 2. 프로젝트 SQL Editor에서 `supabase/setup.sql`을 실행합니다.
    포트폴리오 전용 테이블, 인덱스, 집계 함수를 만듭니다. 다른 앱 테이블은 변경하지 않습니다.
 3. `.env.example`을 `.env`로 복사하고 서버 환경 변수를 설정합니다.
-   - `SUPABASE_URL`: 프로젝트 URL.
-   - `SUPABASE_SECRET_KEY`: 서버 비밀 키. 기존 service_role 키도 지원합니다.
-     이전 환경 변수 이름 `SUPABASE_SERVICE_ROLE_KEY`도 지원합니다.
+   - `POSTGRES_URL`: Vercel의 Supabase 연결이 자동으로 추가하는 서버 전용 연결 문자열.
    - `WHO_ADMIN_USERNAME`: 관리자 이름(기본값 admin).
    - `WHO_ADMIN_PASSWORD`: 무작위로 생성한 16자 이상의 관리자 비밀번호.
 4. Vercel의 기존 Portfolio 프로젝트에 같은 환경 변수를 추가한 뒤 재배포합니다.
@@ -32,7 +30,7 @@ Express/EJS 포트폴리오와 Supabase 방문 통계.
 운영 사이트는 HTTPS를 사용해야 합니다. 관리자 인증은 JSON 조회 경로에도 적용됩니다.
 인증 설정이 없으면 관리자 화면은 닫힌 상태(503)로 유지합니다.
 테이블은 RLS를 활성화하고 공개·일반 로그인 역할의 테이블 및 함수 접근을 회수합니다.
-서버의 service role만 저장·조회하므로 공개 RLS 정책을 만들지 않습니다.
+서버의 Postgres 연결만 저장·조회하므로 공개 RLS 정책을 만들지 않습니다.
 
 기존 MySQL/visitors.json 기록은 자동으로 가져오지 않습니다. 연동 이후 기록부터 쌓입니다.
 DB 요청은 5초 제한이며 저장 실패 시에도 포트폴리오는 계속 표시됩니다.

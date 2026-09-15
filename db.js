@@ -1,27 +1,38 @@
-// Server-only Supabase REST client.
-async function request(endpoint, options = {}) {
-  const url = process.env.SUPABASE_URL;
-  const key = process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!url || !key) throw new Error('SUPABASE_NOT_CONFIGURED');
-  const response = await fetch(url.replace(/\/$/, '') + '/rest/v1/' + endpoint, {
-    ...options,
-    headers: {
-      apikey: key,
-      ...(key.startsWith('sb_secret_') ? {} : { Authorization: 'Bearer ' + key }),
-      'Content-Type': 'application/json',
-      ...options.headers,
-    },
-    signal: AbortSignal.timeout(5000),
-  });
-  if (!response.ok) throw new Error('SUPABASE_HTTP_' + response.status);
-  const text = await response.text();
-  return text ? JSON.parse(text) : null;
+// Server-only connection supplied by the Vercel Supabase integration.
+const { Pool } = require('pg');
+
+let pool;
+function getPool() {
+  if (!pool) {
+    if (!process.env.POSTGRES_URL) throw new Error('SUPABASE_NOT_CONFIGURED');
+    pool = new Pool({
+      connectionString: process.env.POSTGRES_URL,
+      max: 2,
+      connectionTimeoutMillis: 5000,
+      idleTimeoutMillis: 5000,
+    });
+  }
+  return pool;
 }
+
+async function recordVisit(visit) {
+  await getPool().query(
+    `insert into public.portfolio_visits (ip, path, user_agent, referer)
+     values ($1::inet, $2, $3, $4)`,
+    [visit.ip, visit.path, visit.user_agent, visit.referer]
+  );
+}
+
+async function getDashboard(date, page) {
+  const result = await getPool().query(
+    'select public.portfolio_visitor_dashboard($1::date, $2::integer) as dashboard',
+    [date, page]
+  );
+  return result.rows[0].dashboard;
+}
+
 module.exports = {
-  recordVisit: (visit) => request('portfolio_visits', {
-    method: 'POST', headers: { Prefer: 'return=minimal' }, body: JSON.stringify(visit),
-  }),
-  getDashboard: (date, page) => request('rpc/portfolio_visitor_dashboard', {
-    method: 'POST', body: JSON.stringify({ p_date: date, p_page: page }),
-  }),
+  recordVisit,
+  getDashboard,
+  _setPoolForTests: (testPool) => { pool = testPool; },
 };
