@@ -2,10 +2,12 @@ const { isIP } = require('node:net');
 const db = require('./db');
 const pagePaths = new Set(['/', '/award', '/about', '/license', '/career',
   '/project', '/diary', '/index', '/paper']);
+const automatedAgent = /(?:bot\b|crawler|spider|headlesschrome|vercel-favicon|lighthouse|pagespeed|uptime|monitor)/i;
 function shouldLog(req) {
   const pathname = req.path.replace(/\/$/, '') || '/';
   return req.method === 'GET' && pagePaths.has(pathname.toLowerCase()) &&
-    !/prefetch/i.test((req.get('purpose') || '') + ' ' + (req.get('sec-purpose') || ''));
+    !/prefetch/i.test((req.get('purpose') || '') + ' ' + (req.get('sec-purpose') || '')) &&
+    !automatedAgent.test(req.get('user-agent') || '');
 }
 function clientIP(req) {
   // Vercel overwrites X-Forwarded-For. Direct/local requests must not trust it.

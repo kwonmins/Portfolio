@@ -15,6 +15,9 @@ test('only page GETs count; tracking, admin, assets, errors and prefetch do not'
   assert.equal(shouldLog(req('/', 'HEAD')), false);
   assert.equal(shouldLog(req('/', 'POST')), false);
   assert.equal(shouldLog(req('/', 'GET', { 'sec-purpose': 'prefetch' })), false);
+  assert.equal(shouldLog(req('/', 'GET', { 'user-agent': 'vercel-favicon/1.0' })), false);
+  assert.equal(shouldLog(req('/', 'GET', { 'user-agent': 'HeadlessChrome/141.0' })), false);
+  assert.equal(shouldLog(req('/', 'GET', { 'user-agent': 'Mozilla/5.0 Googlebot/2.1' })), false);
 });
 test('client IP validates Vercel forwarding and ignores spoofed headers locally', () => {
   const previous = process.env.VERCEL;
