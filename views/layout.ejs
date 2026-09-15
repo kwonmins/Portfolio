@@ -90,15 +90,7 @@
         }
       }
     </style>
-    <!-- 방문자 기록 추적 -->
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        fetch("/track")
-          .then((response) => response.json())
-          .then((data) => console.log("방문 기록:", data))
-          .catch((error) => console.error("방문 기록 오류:", error));
-      });
-    </script>
+    <!-- 방문 기록은 서버에서 페이지 요청당 한 번 저장합니다. -->
     <!-- Bootstrap JS 추가 -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

@@ -3,8 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "test": "node --test test/*.test.js",
+    "test:sql": "node --test test/sql/*.test.js"
   },
+  "engines": { "node": ">=22" },
   "dependencies": {
     "cookie-parser": "~1.4.4",
     "dayjs": "^1.11.18",

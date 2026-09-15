@@ -1,3 +1,4 @@
+require('dotenv').config({ quiet: true });
 var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
@@ -21,11 +22,6 @@ app.use(express.urlencoded({ extended: false })); // URL-encoded 데이터 처�
 app.use(cookieParser()); // 쿠키 파싱
 app.use(express.static(path.join(__dirname, "public"))); // 정적 파일 제공
 app.use(visitLogger);
-app.use(logger("dev"));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
 
 app.set("layout", "layout");
 app.set("layout extractScripts", true);
@@ -52,7 +48,7 @@ app.use(function (err, req, res, next) {
   res.render("error");
 });
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`🚀 Server is running on port ${PORT}`);
-});
+if (require.main === module) {
+  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+}
 module.exports = app;

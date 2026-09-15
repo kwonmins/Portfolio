@@ -1,199 +1,83 @@
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <title>방문자 목록</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <style>
-      body {
-        font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-        padding: 20px;
-      }
-      h1 {
-        margin: 0 0 12px;
-      }
-      .toolbar {
-        display: flex;
-        gap: 10px;
-        align-items: center;
-        flex-wrap: wrap;
-        margin: 8px 0 16px;
-      }
-      .toolbar .count {
-        color: #666;
-      }
-      .toolbar input[type="text"] {
-        padding: 6px 10px;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        min-width: 240px;
-      }
-      .toolbar button {
-        padding: 6px 12px;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        background: #fff;
-        cursor: pointer;
-      }
-      .toolbar button:hover {
-        background: #f7f7f7;
-      }
-
-      table {
-        width: 100%;
-        border-collapse: collapse;
-      }
-      th,
-      td {
-        border: 1px solid #ddd;
-        padding: 8px;
-        font-size: 14px;
-        word-break: break-all;
-      }
-      th {
-        background: #f7f7f7;
-        text-align: left;
-      }
-      tr:nth-child(even) {
-        background: #fafafa;
-      }
-      .mono {
-        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-        font-size: 12px;
-      }
-      .btn-copy {
-        border: 1px solid #ddd;
-        background: #fff;
-        padding: 2px 6px;
-        border-radius: 6px;
-        margin-left: 6px;
-        cursor: pointer;
-      }
-      .btn-copy:hover {
-        background: #f0f0f0;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>방문자 IP / User-Agent</h1>
-
-    <div class="toolbar">
-      <span class="count"
-        >최근 200건 · 현재
-        <strong><%= (visitors && visitors.length) || 0 %></strong>건</span
-      >
-      <input id="q" type="text" placeholder="검색: IP/경로/Referer/UA" />
-      <button id="btnRefresh" type="button">새로고침</button>
-      <button id="btnClear" type="button">검색 지우기</button>
-    </div>
-
-    <table id="tbl">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>시간</th>
-          <th>IP</th>
-          <th>경로</th>
-          <th>Referer</th>
-          <th>User-Agent</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% if (Array.isArray(visitors) && visitors.length) { %> <%
-        visitors.forEach(function(v){ %>
-        <tr>
-          <td class="mono"><%= v.id %></td>
-          <td class="mono">
-            <%= new Date(v.created_at).toLocaleString('ko-KR', { timeZone:
-            'Asia/Seoul' }) %>
-          </td>
-          <td class="mono">
-            <span><%= v.ip %></span>
-            <button type="button" class="btn-copy" data-copy="<%= v.ip %>">
-              복사
-            </button>
-          </td>
-          <td class="mono"><%= v.path %></td>
-          <td class="mono"><%= v.referer || '' %></td>
-          <td class="mono"><%= v.user_agent || '' %></td>
-        </tr>
-        <% }); %> <% } else { %>
-        <tr>
-          <td colspan="6">데이터가 없습니다.</td>
-        </tr>
-        <% } %>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>방문 통계 · 권민성 포트폴리오</title>
+  <link rel="stylesheet" href="/who.css">
+</head>
+<body>
+<main>
+  <header>
+    <div><p class="eyebrow">PORTFOLIO / VISITORS</p><h1>방문 통계</h1>
+    <p class="intro muted">누가, 언제, 얼마나 방문했는지 확인하세요.</p></div>
+    <a href="/" class="home">포트폴리오로 돌아가기 ↗</a>
+  </header>
+  <form class="controls" method="get" action="/who">
+    <label for="date">조회 날짜</label>
+    <input id="date" name="date" type="date" value="<%= stats.date %>" min="2000-01-01" max="2100-12-31" required>
+    <button type="submit" class="primary">조회</button>
+    <a class="button" href="/who">오늘</a>
+    <button type="button" id="refresh">새로고침</button>
+    <span class="muted">한국 시간 · 00:00–24:00</span>
+  </form>
+  <div class="metrics">
+    <div class="metric"><dl><dt><%= stats.date === today ? '오늘' : stats.date %> 방문자</dt><dd><%= number(stats.selected_visitors) %></dd></dl><small>동일 IP는 하루 1명</small></div>
+    <div class="metric"><dl><dt>선택일 접속 횟수</dt><dd><%= number(stats.selected_views) %></dd></dl><small>페이지 이동·새로고침 포함</small></div>
+    <div class="metric"><dl><dt>누적 방문자</dt><dd><%= number(stats.total_visitors) %></dd></dl><small>전체 기간 고유 IP</small></div>
+    <div class="metric"><dl><dt>누적 접속 횟수</dt><dd><%= number(stats.total_views) %></dd></dl><small>저장된 모든 방문 기록</small></div>
+  </div>
+  <div class="daily-grid">
+    <section class="section" aria-labelledby="daily-heading">
+      <div class="section-title"><div><h2 id="daily-heading">일별 방문 현황</h2><p>선택일까지 최근 30일 · 막대 높이는 방문자 수입니다.</p></div></div>
+      <% const maxVisitors = Math.max(1, ...stats.daily.map(d => Number(d.visitors))); %>
+      <div class="chart" role="img" aria-label="최근 30일 방문자 추이. 정확한 수치는 아래 표에서 확인할 수 있습니다.">
+        <% stats.daily.slice().reverse().forEach(d => { %>
+          <a class="bar" href="/who?date=<%= d.day %>" style="height:<%= Math.max(2, Number(d.visitors) / maxVisitors * 100) %>%" title="<%= d.day %>: 방문자 <%= d.visitors %>명, 접속 <%= d.views %>회" aria-label="<%= d.day %> 통계 조회"></a>
+        <% }); %>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th scope="col">날짜</th><th scope="col" class="numeric">방문자</th><th scope="col" class="numeric">접속 횟수</th></tr></thead>
+        <tbody><% stats.daily.forEach(d => { %><tr>
+          <td><a href="/who?date=<%= d.day %>"><%= d.day %></a></td><td class="numeric"><%= number(d.visitors) %></td><td class="numeric"><%= number(d.views) %></td>
+        </tr><% }); %></tbody>
+      </table></div>
+    </section>
+    <section class="section" aria-labelledby="ip-heading">
+      <div class="section-title"><div><h2 id="ip-heading">동일 IP 접속 횟수</h2><p><%= stats.date %>에 방문한 IP · 접속 횟수순</p></div></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th scope="col">IP / 최근 방문</th><th scope="col" class="numeric">선택일</th><th scope="col" class="numeric">누적</th></tr></thead>
+        <tbody><% stats.ips.forEach(v => { %><tr>
+          <td><div class="mono"><%= v.ip %></div><small class="muted time"><%= time(v.last_visit) %></small></td>
+          <td class="numeric"><strong><%= number(v.views) %></strong></td><td class="numeric"><%= number(v.total_views) %></td>
+        </tr><% }); %>
+        <% if (!stats.ips.length) { %><tr><td colspan="3" class="empty">이 페이지에 표시할 방문 기록이 없습니다.</td></tr><% } %></tbody>
+      </table></div>
+      <nav class="pagination" aria-label="IP 목록 페이지">
+        <% if (stats.page > 1) { %><a href="/who?date=<%= stats.date %>&page=<%= stats.page - 1 %>">이전</a><% } %>
+        <span><%= number(stats.page) %> / <%= number(Math.max(1, Math.ceil(stats.selected_visitors / stats.page_size))) %></span>
+        <% if (stats.page * stats.page_size < stats.selected_visitors) { %><a href="/who?date=<%= stats.date %>&page=<%= stats.page + 1 %>">다음</a><% } %>
+      </nav>
+    </section>
+  </div>
+  <section class="section" aria-labelledby="recent-heading">
+    <div class="section-title"><div><h2 id="recent-heading">접속 기록</h2><p>선택일 최근 200건 · 합계는 전체 기록 기준입니다.</p></div>
+      <input class="search" id="search" type="search" aria-label="표시된 접속 기록 검색" placeholder="표시된 기록에서 IP·경로 검색"></div>
+    <div class="table-wrap"><table id="recent-table">
+      <thead><tr><th scope="col">방문 시간 (KST)</th><th scope="col">IP</th><th scope="col">방문 페이지</th><th scope="col">유입 경로</th><th scope="col">브라우저·기기</th></tr></thead>
+      <tbody><% stats.recent.forEach(v => { %><tr data-visit>
+        <td class="time"><%= time(v.created_at) %></td><td class="mono"><%= v.ip %></td><td><%= v.path %></td>
+        <td class="details"><%= v.referer || '직접 방문 / 정보 없음' %></td><td class="details"><%= v.user_agent || '정보 없음' %></td>
+      </tr><% }); %>
+      <% if (!stats.recent.length) { %><tr><td colspan="5" class="empty">이 날짜에는 방문 기록이 없습니다.</td></tr><% } %>
+      <tr id="no-matches" hidden><td colspan="5" class="empty">검색 결과가 없습니다.</td></tr>
       </tbody>
-    </table>
-
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        var q = document.getElementById("q");
-        var btnRefresh = document.getElementById("btnRefresh");
-        var btnClear = document.getElementById("btnClear");
-
-        function showAllRows() {
-          document.querySelectorAll("#tbl tbody tr").forEach(function (tr) {
-            tr.style.display = "";
-          });
-        }
-
-        function filterTable(keyword) {
-          var kw = (keyword || "").toLowerCase().trim();
-          var rows = document.querySelectorAll("#tbl tbody tr");
-          if (!kw) {
-            showAllRows();
-            return;
-          }
-          rows.forEach(function (tr) {
-            var text = tr.textContent.toLowerCase();
-            tr.style.display = text.indexOf(kw) !== -1 ? "" : "none";
-          });
-        }
-
-        // 검색 입력 이벤트
-        if (q) {
-          q.addEventListener("input", function (e) {
-            filterTable(e.target.value);
-          });
-        }
-
-        // 새로고침
-        if (btnRefresh) {
-          btnRefresh.addEventListener("click", function () {
-            location.reload();
-          });
-        }
-
-        // 검색 지우기
-        if (btnClear) {
-          btnClear.addEventListener("click", function () {
-            if (q) {
-              q.value = "";
-              q.focus();
-            }
-            showAllRows();
-          });
-        }
-
-        // 복사 버튼(이벤트 위임)
-        document.getElementById("tbl").addEventListener("click", function (e) {
-          var btn = e.target.closest(".btn-copy");
-          if (!btn) return;
-          var text = btn.getAttribute("data-copy") || "";
-          if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(text).catch(function () {});
-          } else {
-            var ta = document.createElement("textarea");
-            ta.value = text;
-            document.body.appendChild(ta);
-            ta.select();
-            try {
-              document.execCommand("copy");
-            } catch (e) {}
-            document.body.removeChild(ta);
-          }
-        });
-      });
-    </script>
-  </body>
+    </table></div>
+  </section>
+  <p class="note">방문자 수는 고유 IP 기준이며 실제 사람 수와 다를 수 있습니다. 같은 네트워크의 여러 사람은 같은 IP로 표시될 수 있습니다.
+  접속 횟수는 포트폴리오 페이지 요청 수이며 봇 요청도 포함될 수 있습니다. 관리자 페이지·이미지·CSS·추적 API는 집계하지 않습니다.</p>
+</main>
+<script src="/who.js" defer></script>
+</body>
 </html>

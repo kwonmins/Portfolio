@@ -1,65 +1,63 @@
-// routes/who.js
-const express = require("express");
+const express = require('express');
+const crypto = require('node:crypto');
+const db = require('../db');
 const router = express.Router();
-const pool = require("../db");
-
-// ✅ 진단: 이 라우트가 실제로 타는지 로그
+function equal(a, b) {
+  const digest = (value) => crypto.createHash('sha256').update(value).digest();
+  return crypto.timingSafeEqual(digest(a), digest(b));
+}
 router.use((req, res, next) => {
-  console.log("[WHO ROUTER] hit:", req.method, req.originalUrl);
+  res.set({ 'Cache-Control': 'private, no-store', 'X-Robots-Tag': 'noindex, nofollow',
+    'Referrer-Policy': 'no-referrer', 'X-Content-Type-Options': 'nosniff' });
+  const password = process.env.WHO_ADMIN_PASSWORD;
+  if (!password || password.length < 16) {
+    return res.status(503).send('방문 통계 관리자 인증 설정이 필요합니다.');
+  }
+  const header = req.get('authorization') || '';
+  const credentials = /^Basic /i.test(header) ? Buffer.from(header.slice(6), 'base64').toString('utf8') : '';
+  const separator = credentials.indexOf(':');
+  const username = separator < 0 ? '' : credentials.slice(0, separator);
+  const supplied = separator < 0 ? '' : credentials.slice(separator + 1);
+  const validUser = equal(username, process.env.WHO_ADMIN_USERNAME || 'admin');
+  const validPassword = equal(supplied, password);
+  if (!validUser || !validPassword) {
+    res.set('WWW-Authenticate', 'Basic realm="Portfolio statistics", charset="UTF-8"');
+    return res.status(401).send('관리자 로그인이 필요합니다.');
+  }
   next();
 });
-
-// ✅ JSON으로 바로 보기 (브라우저에서 /who/data 로 확인)
-router.get("/data", async (req, res, next) => {
+function todayKST() {
+  return new Date(Date.now() + 9 * 60 * 60 * 1000).toISOString().slice(0, 10);
+}
+function parameters(query) {
+  const date = query.date === undefined ? todayKST() : query.date;
+  if (typeof date !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(date) ||
+      !Number.isFinite(Date.parse(date + 'T00:00:00Z')) ||
+      new Date(date + 'T00:00:00Z').toISOString().slice(0, 10) !== date ||
+      date < '2000-01-01' || date > '2100-12-31') throw new Error('INVALID_DATE');
+  const rawPage = query.page === undefined ? '1' : query.page;
+  if (typeof rawPage !== 'string' || !/^[1-9]\d{0,5}$/.test(rawPage)) throw new Error('INVALID_PAGE');
+  return { date, page: Number(rawPage) };
+}
+async function dashboard(req, res) {
+  let params;
+  try { params = parameters(req.query); }
+  catch { return res.status(400).send('올바른 날짜와 페이지 번호를 입력해 주세요.'); }
   try {
-    const [rows] = await pool.query(
-      `SELECT id, ip, user_agent, path, referer, created_at
-       FROM ip_visitor
-       ORDER BY id DESC
-       LIMIT 200`
-    );
-    res.set("Cache-Control", "no-store");
-    res.json({ ok: true, count: rows.length, rows });
-  } catch (err) {
-    next(err);
+    const stats = await db.getDashboard(params.date, params.page);
+    if (req.path === '/data') return res.json({ ok: true, ...stats });
+    if (req.path === '/count') return res.json({ ok: true, count: stats.total_views,
+      date: stats.date, daily_views: stats.selected_views, daily_visitors: stats.selected_visitors });
+    return res.render('who', { layout: false, stats, today: todayKST(),
+      number: (n) => Number(n || 0).toLocaleString('ko-KR'),
+      time: (value) => new Date(value).toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' }) });
+  } catch (error) {
+    console.error('[who] query failed:', error.message);
+    return res.status(503).send('방문 통계를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.');
   }
-});
-
-// ✅ 카운트만 보기 (/who/count)
-router.get("/count", async (req, res, next) => {
-  try {
-    const [rows] = await pool.query(`SELECT COUNT(*) AS c FROM ip_visitor`);
-    res.set("Cache-Control", "no-store");
-    res.json({ ok: true, count: rows[0].c });
-  } catch (err) {
-    next(err);
-  }
-});
-
-// ✅ 최종: 뷰 렌더 (여기가 /who 페이지)
-router.get("/", async (req, res, next) => {
-  try {
-    // 캐시 방지(304 회피)
-    res.set(
-      "Cache-Control",
-      "no-store, no-cache, must-revalidate, proxy-revalidate"
-    );
-    res.set("Pragma", "no-cache");
-    res.set("Expires", "0");
-    res.set("Surrogate-Control", "no-store");
-
-    const [rows] = await pool.query(
-      `SELECT id, ip, user_agent, path, referer, created_at
-       FROM ip_visitor
-       ORDER BY id DESC
-       LIMIT 200`
-    );
-
-    console.log("[WHO ROUTER] rows:", rows.length); // ✅ 콘솔 확인
-    res.status(200).render("who", { visitors: rows }); // ✅ visitors 로 전달
-  } catch (err) {
-    next(err);
-  }
-});
-
+}
+router.get('/', dashboard);
+router.get('/data', dashboard);
+router.get('/count', dashboard);
 module.exports = router;
+module.exports.parameters = parameters;
