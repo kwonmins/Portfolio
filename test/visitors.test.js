@@ -3,6 +3,7 @@ const assert = require('node:assert/strict');
 const { once } = require('node:events');
 const { shouldLog, clientIP, safeReferer } = require('../server');
 const { parameters } = require('../routes/who');
+const { _getConnectionOptionsForTests } = require('../db');
 const req = (path, method = 'GET', headers = {}) => ({ path, method, headers,
   get: key => headers[key], socket: { remoteAddress: '::ffff:192.0.2.1' } });
 
@@ -34,6 +35,16 @@ test('dates reject overflow and arrays; referrers omit query secrets and credent
   for (const page of ['0', '-1', '1.5', '1000000', ['1']]) assert.throws(() => parameters({ page }));
   assert.equal(safeReferer('https://user:password@example.com/path?token=secret#x'), 'https://example.com/path');
   assert.equal(safeReferer('javascript:alert(1)'), '');
+});
+test('Supabase pool connection keeps TLS and removes conflicting libpq SSL options', () => {
+  const options = _getConnectionOptionsForTests(
+    'postgresql://user:password@example.com:6543/postgres?sslmode=require&sslrootcert=ignored&application_name=portfolio'
+  );
+  const normalized = new URL(options.connectionString);
+  assert.equal(normalized.searchParams.has('sslmode'), false);
+  assert.equal(normalized.searchParams.has('sslrootcert'), false);
+  assert.equal(normalized.searchParams.get('application_name'), 'portfolio');
+  assert.deepEqual(options.ssl, { rejectUnauthorized: false });
 });
 test('HTTP routes persist once, require admin for every stats endpoint, and fail safely', async () => {
   const originalEnv = { ...process.env };

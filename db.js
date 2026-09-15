@@ -2,15 +2,30 @@
 const { Pool } = require('pg');
 
 let pool;
+
+function getConnectionOptions(connectionString) {
+  const connectionUrl = new URL(connectionString);
+
+  // node-postgres lets sslmode from a connection string overwrite an explicit
+  // ssl object. Vercel supplies sslmode=require, so remove those libpq options
+  // before configuring the TLS behavior used by the Supabase pooler.
+  ['sslmode', 'sslcert', 'sslkey', 'sslrootcert'].forEach((name) => {
+    connectionUrl.searchParams.delete(name);
+  });
+
+  return {
+    connectionString: connectionUrl.toString(),
+    ssl: { rejectUnauthorized: false },
+    max: 2,
+    connectionTimeoutMillis: 5000,
+    idleTimeoutMillis: 5000,
+  };
+}
+
 function getPool() {
   if (!pool) {
     if (!process.env.POSTGRES_URL) throw new Error('SUPABASE_NOT_CONFIGURED');
-    pool = new Pool({
-      connectionString: process.env.POSTGRES_URL,
-      max: 2,
-      connectionTimeoutMillis: 5000,
-      idleTimeoutMillis: 5000,
-    });
+    pool = new Pool(getConnectionOptions(process.env.POSTGRES_URL));
   }
   return pool;
 }
@@ -35,4 +50,5 @@ module.exports = {
   recordVisit,
   getDashboard,
   _setPoolForTests: (testPool) => { pool = testPool; },
+  _getConnectionOptionsForTests: getConnectionOptions,
 };
