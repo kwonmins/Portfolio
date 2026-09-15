@@ -58,7 +58,7 @@ test('HTTP routes persist once, require admin for every stats endpoint, and fail
     recent: [{ created_at: '2026-09-15T00:00:00Z', ip: '192.0.2.1',
       path: '/', user_agent: '<script>alert(1)</script>', referer: '' }] };
   process.env.POSTGRES_URL = 'postgresql://server-only-secret';
-  process.env.WHO_ADMIN_PASSWORD = 'test-password-at-least-16';
+  process.env.WHO_ADMIN_PASSWORD = 'test-pass-13!';
   process.env.WHO_ADMIN_USERNAME = 'admin';
   delete process.env.VERCEL;
   const db = require('../db');

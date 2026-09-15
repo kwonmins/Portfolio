@@ -21,7 +21,7 @@ Express/EJS 포트폴리오와 Supabase 방문 통계.
 3. `.env.example`을 `.env`로 복사하고 서버 환경 변수를 설정합니다.
    - `POSTGRES_URL`: Vercel의 Supabase 연결이 자동으로 추가하는 서버 전용 연결 문자열.
    - `WHO_ADMIN_USERNAME`: 관리자 이름(기본값 admin).
-   - `WHO_ADMIN_PASSWORD`: 무작위로 생성한 16자 이상의 관리자 비밀번호.
+   - `WHO_ADMIN_PASSWORD`: 방문 통계 관리자 비밀번호.
 4. Vercel의 기존 Portfolio 프로젝트에 같은 환경 변수를 추가한 뒤 재배포합니다.
    비밀 키와 비밀번호를 GitHub, HTML, 클라이언트 JS에 넣지 마세요.
 5. 포트폴리오 페이지를 두 번 방문한 뒤 통계에서 접속 2회, 고유 IP 1개 증가를 확인합니다.

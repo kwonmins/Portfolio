@@ -10,7 +10,7 @@ router.use((req, res, next) => {
   res.set({ 'Cache-Control': 'private, no-store', 'X-Robots-Tag': 'noindex, nofollow',
     'Referrer-Policy': 'no-referrer', 'X-Content-Type-Options': 'nosniff' });
   const password = process.env.WHO_ADMIN_PASSWORD;
-  if (!password || password.length < 16) {
+  if (!password) {
     return res.status(503).send('방문 통계 관리자 인증 설정이 필요합니다.');
   }
   const header = req.get('authorization') || '';
