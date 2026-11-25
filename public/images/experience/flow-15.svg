@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" role="img" aria-label="포트 사용률 조회 흐름도" viewBox="0 0 560 724.0" width="560" height="724.0" class="flow-svg">
+<title>포트 사용률 조회 흐름도</title>
+<defs><marker id="arr-ot24-05" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#7389A0"/></marker></defs>
+<rect width="100%" height="100%" fill="white"/>
+<path d="M280 118 L280 184" fill="none" stroke="#7389A0" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arr-ot24-05)"/>
+<path d="M280 260 L280 326" fill="none" stroke="#7389A0" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arr-ot24-05)"/>
+<path d="M280 402 L280 468" fill="none" stroke="#7389A0" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arr-ot24-05)"/>
+<path d="M280 544 L280 610" fill="none" stroke="#7389A0" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arr-ot24-05)"/>
+<rect x="85.0" y="42.0" width="390" height="76" rx="13" fill="#E2E8F0" stroke="#8C9DB1" stroke-width="2"/>
+<text x="280" y="80.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="18.0" font-weight="500" fill="#182B43">show port utilization</text>
+<rect x="85.0" y="184.0" width="390" height="76" rx="13" fill="#EFF6FF" stroke="#90A9C5" stroke-width="2"/>
+<text x="280" y="222.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="18.0" font-weight="500" fill="#182B43">포트별 트래픽 통계 조회</text>
+<rect x="85.0" y="326.0" width="390" height="76" rx="13" fill="#EFF6FF" stroke="#90A9C5" stroke-width="2"/>
+<text x="280" y="364.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="18.0" font-weight="500" fill="#182B43">사용률 산출 및 표시 데이터 구성</text>
+<rect x="85.0" y="468.0" width="390" height="76" rx="13" fill="#E6F5F0" stroke="#70A99A" stroke-width="2"/>
+<text x="280" y="506.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="18.0" font-weight="500" fill="#182B43">CLI 사용률 출력</text>
+<rect x="85.0" y="610.0" width="390" height="76" rx="13" fill="#E6F5F0" stroke="#70A99A" stroke-width="2"/>
+<text x="280" y="648.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="18.0" font-weight="500" fill="#182B43">조회 기능 검증 완료</text>
+</svg>

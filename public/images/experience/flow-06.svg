@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" role="img" aria-label="보드 초기화 흐름도" viewBox="0 0 560 1150.0" width="560" height="1150.0" class="flow-svg">
+<title>보드 초기화 흐름도</title>
+<defs><marker id="arr-utp-01" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#7389A0"/></marker></defs>
+<rect width="100%" height="100%" fill="white"/>
+<path d="M280 118 L280 184" fill="none" stroke="#7389A0" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arr-utp-01)"/>
+<path d="M280 260 L280 326" fill="none" stroke="#7389A0" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arr-utp-01)"/>
+<path d="M280 402 L280 468" fill="none" stroke="#7389A0" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arr-utp-01)"/>
+<path d="M280 544 L280 610" fill="none" stroke="#7389A0" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arr-utp-01)"/>
+<path d="M280 686 L280 752" fill="none" stroke="#7389A0" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arr-utp-01)"/>
+<path d="M280 828 L280 894" fill="none" stroke="#7389A0" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arr-utp-01)"/>
+<path d="M280 970 L280 1036" fill="none" stroke="#7389A0" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arr-utp-01)"/>
+<rect x="85.0" y="42.0" width="390" height="76" rx="13" fill="#E2E8F0" stroke="#8C9DB1" stroke-width="2"/>
+<text x="280" y="80.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="18.0" font-weight="500" fill="#182B43">전원 인가 / MCU 부팅</text>
+<rect x="85.0" y="184.0" width="390" height="76" rx="13" fill="#EFF6FF" stroke="#90A9C5" stroke-width="2"/>
+<text x="280" y="222.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="18.0" font-weight="500" fill="#182B43">HAL_Init / 시스템 클럭 설정</text>
+<rect x="85.0" y="326.0" width="390" height="76" rx="13" fill="#EFF6FF" stroke="#90A9C5" stroke-width="2"/>
+<text x="280" y="364.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="18.0" font-weight="500" fill="#182B43">GPIO / MDIO / USART 초기화</text>
+<rect x="85.0" y="468.0" width="390" height="76" rx="13" fill="#EFF6FF" stroke="#90A9C5" stroke-width="2"/>
+<text x="280" y="506.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="18.0" font-weight="500" fill="#182B43">포트 상태 DB 초기화</text>
+<rect x="85.0" y="610.0" width="390" height="76" rx="13" fill="#EFF6FF" stroke="#90A9C5" stroke-width="2"/>
+<text x="280" y="636.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="18.0" font-weight="500" fill="#182B43">PHY 4개 ID 읽기</text>
+<text x="280" y="660.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="18.0" font-weight="500" fill="#182B43">EEE 비활성화 / LED 설정</text>
+<rect x="85.0" y="752.0" width="390" height="76" rx="13" fill="#EFF6FF" stroke="#90A9C5" stroke-width="2"/>
+<text x="280" y="778.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="18.0" font-weight="500" fill="#182B43">다이얼 모드 읽기</text>
+<text x="280" y="802.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="18.0" font-weight="500" fill="#182B43">PHY 속도 설정</text>
+<rect x="85.0" y="894.0" width="390" height="76" rx="13" fill="#EFF6FF" stroke="#90A9C5" stroke-width="2"/>
+<text x="280" y="920.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="18.0" font-weight="500" fill="#182B43">릴레이 제어 후</text>
+<text x="280" y="944.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="18.0" font-weight="500" fill="#182B43">디버그 진입 대기</text>
+<rect x="85.0" y="1036.0" width="390" height="76" rx="13" fill="#E6F5F0" stroke="#70A99A" stroke-width="2"/>
+<text x="280" y="1062.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="18.0" font-weight="500" fill="#182B43">버전 출력 / 메인 루프</text>
+<text x="280" y="1086.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="18.0" font-weight="500" fill="#182B43">링크 감시 · LLCF · LED</text>
+</svg>

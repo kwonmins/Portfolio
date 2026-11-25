@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" role="img" aria-label="디버그 CLI 흐름도" viewBox="0 0 1140 1150.0" width="1140" height="1150.0" class="flow-svg">
+<title>디버그 CLI 흐름도</title>
+<defs><marker id="arr-utp-04" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#7389A0"/></marker></defs>
+<rect width="100%" height="100%" fill="white"/>
+<path d="M500 118 L500 169" fill="none" stroke="#7389A0" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arr-utp-04)"/>
+<path d="M500 275 L500 326" fill="none" stroke="#7389A0" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arr-utp-04)"/>
+<path d="M675 222 L1050 222 L1050 1074 L641 1074" fill="none" stroke="#7389A0" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arr-utp-04)"/>
+<path d="M500 402 L500 468" fill="none" stroke="#7389A0" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arr-utp-04)"/>
+<path d="M455 544 L455 577 L180 577 L180 610" fill="none" stroke="#7389A0" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arr-utp-04)"/>
+<path d="M500 544 L500 610" fill="none" stroke="#7389A0" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arr-utp-04)"/>
+<path d="M545 544 L545 577 L820 577 L820 610" fill="none" stroke="#7389A0" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arr-utp-04)"/>
+<path d="M180 686 L180 719 L455 719 L455 752" fill="none" stroke="#7389A0" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arr-utp-04)"/>
+<path d="M500 686 L500 752" fill="none" stroke="#7389A0" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arr-utp-04)"/>
+<path d="M820 686 L820 719 L545 719 L545 752" fill="none" stroke="#7389A0" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arr-utp-04)"/>
+<path d="M500 828 L500 879" fill="none" stroke="#7389A0" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arr-utp-04)"/>
+<path d="M325 932 L20 932 L20 506 L359 506" fill="none" stroke="#7389A0" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arr-utp-04)"/>
+<path d="M500 985 L500 1036" fill="none" stroke="#7389A0" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arr-utp-04)"/>
+<rect x="359.0" y="42.0" width="282" height="76" rx="13" fill="#E2E8F0" stroke="#8C9DB1" stroke-width="2"/>
+<text x="500" y="80.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="18.0" font-weight="500" fill="#182B43">부팅 시 USART 입력 대기</text>
+<polygon points="500,169.0 675.0,222 500,275.0 325.0,222" fill="#FFF4DD" stroke="#C89B4D" stroke-width="2"/>
+<text x="500" y="222.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="18.0" font-weight="500" fill="#182B43">Ctrl+C 입력?</text>
+<rect x="359.0" y="326.0" width="282" height="76" rx="13" fill="#EFF6FF" stroke="#90A9C5" stroke-width="2"/>
+<text x="500" y="364.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="18.0" font-weight="500" fill="#182B43">디버그 CLI 진입</text>
+<rect x="359.0" y="468.0" width="282" height="76" rx="13" fill="#EFF6FF" stroke="#90A9C5" stroke-width="2"/>
+<text x="500" y="494.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="18.0" font-weight="500" fill="#182B43">콘솔 명령 해석</text>
+<text x="500" y="518.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="18.0" font-weight="500" fill="#182B43">입력 형식·범위 검증</text>
+<rect x="39.0" y="610.0" width="282" height="76" rx="13" fill="#F0ECFA" stroke="#A59BC6" stroke-width="2"/>
+<text x="180" y="636.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="18.0" font-weight="500" fill="#182B43">read / write</text>
+<text x="180" y="660.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="18.0" font-weight="500" fill="#182B43">PHY 페이지·레지스터 접근</text>
+<rect x="359.0" y="610.0" width="282" height="76" rx="13" fill="#F0ECFA" stroke="#A59BC6" stroke-width="2"/>
+<text x="500" y="636.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="18.0" font-weight="500" fill="#182B43">relay on / off</text>
+<text x="500" y="660.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="18.0" font-weight="500" fill="#182B43">GPIO 제어</text>
+<rect x="679.0" y="610.0" width="282" height="76" rx="13" fill="#F0ECFA" stroke="#A59BC6" stroke-width="2"/>
+<text x="820" y="636.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="18.0" font-weight="500" fill="#182B43">help / 잘못된 명령</text>
+<text x="820" y="660.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="18.0" font-weight="500" fill="#182B43">안내 메시지</text>
+<rect x="359.0" y="752.0" width="282" height="76" rx="13" fill="#EFF6FF" stroke="#90A9C5" stroke-width="2"/>
+<text x="500" y="790.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="18.0" font-weight="500" fill="#182B43">처리 결과 / 오류 출력</text>
+<polygon points="500,879.0 675.0,932 500,985.0 325.0,932" fill="#FFF4DD" stroke="#C89B4D" stroke-width="2"/>
+<text x="500" y="932.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="18.0" font-weight="500" fill="#182B43">ESC 입력?</text>
+<rect x="359.0" y="1036.0" width="282" height="76" rx="13" fill="#E6F5F0" stroke="#70A99A" stroke-width="2"/>
+<text x="500" y="1074.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="18.0" font-weight="500" fill="#182B43">일반 동작 루프</text>
+<rect x="525.0" y="290.5" width="26" height="20" rx="3" fill="white"/>
+<text x="538" y="300.5" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="14" fill="#465B70">예</text>
+<rect x="1023.0" y="310" width="54" height="20" rx="3" fill="white"/>
+<text x="1050" y="320" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="14" fill="#465B70">아니오</text>
+<rect x="26.0" y="780" width="54" height="20" rx="3" fill="white"/>
+<text x="53" y="790" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="14" fill="#465B70">아니오</text>
+<rect x="525.0" y="1000.5" width="26" height="20" rx="3" fill="white"/>
+<text x="538" y="1010.5" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="14" fill="#465B70">예</text>
+</svg>

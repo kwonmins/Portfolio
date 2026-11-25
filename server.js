@@ -1,7 +1,7 @@
 const { isIP } = require('node:net');
 const db = require('./db');
 const pagePaths = new Set(['/', '/award', '/about', '/license', '/career',
-  '/project', '/diary', '/index', '/paper']);
+  '/project', '/experience', '/diary', '/index', '/paper']);
 const automatedAgent = /(?:bot\b|crawler|spider|headlesschrome|vercel-favicon|lighthouse|pagespeed|uptime|monitor)/i;
 function shouldLog(req) {
   const pathname = req.path.replace(/\/$/, '') || '/';

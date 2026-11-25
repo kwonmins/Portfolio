@@ -26,6 +26,9 @@ router.get("/career", function (req, res) {
 router.get("/project", function (req, res) {
   res.render("project", { title: "Express" });
 });
+router.get("/experience", function (req, res) {
+  res.render("experience", { title: "실무경험" });
+});
 router.get("/diary", function (req, res) {
   res.render("diary", { title: "Express" });
 });

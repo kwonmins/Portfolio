@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" role="img" aria-label="장비 간 통신 구성도" viewBox="0 0 1000 866.0" width="1000" height="866.0" class="flow-svg">
+<title>장비 간 통신 구성도</title>
+<defs><marker id="arr-cluster-01" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#7389A0"/></marker></defs>
+<rect width="100%" height="100%" fill="white"/>
+<path d="M360 118 L360 184" fill="none" stroke="#7389A0" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arr-cluster-01)"/>
+<path d="M219 790 L100 790 L100 222 L219 222" fill="none" stroke="#7389A0" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arr-cluster-01)"/>
+<path d="M360 260 L360 326" fill="none" stroke="#7389A0" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arr-cluster-01)"/>
+<path d="M501 349 L619 349" fill="none" stroke="#7389A0" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arr-cluster-01)"/>
+<path d="M619 379 L501 379" fill="none" stroke="#7389A0" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arr-cluster-01)"/>
+<path d="M360 402 L360 468" fill="none" stroke="#7389A0" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arr-cluster-01)"/>
+<path d="M619 506 L501 506" fill="none" stroke="#7389A0" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arr-cluster-01)"/>
+<path d="M360 544 L360 610" fill="none" stroke="#7389A0" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arr-cluster-01)"/>
+<path d="M360 686 L360 752" fill="none" stroke="#7389A0" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arr-cluster-01)"/>
+<rect x="219.0" y="42.0" width="282" height="76" rx="13" fill="#E2E8F0" stroke="#8C9DB1" stroke-width="2"/>
+<text x="360" y="68.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="18.0" font-weight="500" fill="#182B43">Local 장비</text>
+<text x="360" y="92.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="18.0" font-weight="500" fill="#182B43">상태 DB / 설정</text>
+<rect x="219.0" y="184.0" width="282" height="76" rx="13" fill="#EFF6FF" stroke="#90A9C5" stroke-width="2"/>
+<text x="360" y="210.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="15.6" font-weight="500" fill="#182B43">메시지 구성</text>
+<text x="360" y="234.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="15.6" font-weight="500" fill="#182B43">Heartbeat / 상태 변경 / Reboot</text>
+<rect x="219.0" y="326.0" width="282" height="76" rx="13" fill="#F0ECFA" stroke="#A59BC6" stroke-width="2"/>
+<text x="360" y="352.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="18.0" font-weight="500" fill="#182B43">UDP 송신·수신</text>
+<text x="360" y="376.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="18.0" font-weight="500" fill="#182B43">논블로킹 소켓</text>
+<rect x="619.0" y="326.0" width="282" height="76" rx="13" fill="#E2E8F0" stroke="#8C9DB1" stroke-width="2"/>
+<text x="760" y="352.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="18.0" font-weight="500" fill="#182B43">Peer 장비</text>
+<text x="760" y="376.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="18.0" font-weight="500" fill="#182B43">동일한 통신 기능</text>
+<rect x="219.0" y="468.0" width="282" height="76" rx="13" fill="#EFF6FF" stroke="#90A9C5" stroke-width="2"/>
+<text x="360" y="506.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="18.0" font-weight="500" fill="#182B43">epoll 이벤트 감시</text>
+<rect x="219.0" y="610.0" width="282" height="76" rx="13" fill="#E6F5F0" stroke="#70A99A" stroke-width="2"/>
+<text x="360" y="636.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="18.0" font-weight="500" fill="#182B43">Peer 상태 갱신</text>
+<text x="360" y="660.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="18.0" font-weight="500" fill="#182B43">마지막 수신 시각</text>
+<rect x="619.0" y="468.0" width="282" height="76" rx="13" fill="#F0ECFA" stroke="#A59BC6" stroke-width="2"/>
+<text x="760" y="494.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="18.0" font-weight="500" fill="#182B43">설정 변경 이벤트</text>
+<text x="760" y="518.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="18.0" font-weight="500" fill="#182B43">eventfd 통지</text>
+<rect x="219.0" y="752.0" width="282" height="76" rx="13" fill="#EFF6FF" stroke="#90A9C5" stroke-width="2"/>
+<text x="360" y="778.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="18.0" font-weight="500" fill="#182B43">주기 처리</text>
+<text x="360" y="802.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="18.0" font-weight="500" fill="#182B43">Heartbeat / Timeout 판단</text>
+<rect x="55.0" y="440" width="90" height="20" rx="3" fill="white"/>
+<text x="100" y="450" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="14" fill="#465B70">주기 메시지</text>
+<rect x="540.0" y="327" width="40" height="20" rx="3" fill="white"/>
+<text x="560" y="337" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="14" fill="#465B70">송신</text>
+<rect x="540.0" y="393" width="40" height="20" rx="3" fill="white"/>
+<text x="560" y="403" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="14" fill="#465B70">수신</text>
+<rect x="353.0" y="567.0" width="90" height="20" rx="3" fill="white"/>
+<text x="398" y="577.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK KR, Malgun Gothic, sans-serif" font-size="14" fill="#465B70">수신 이벤트</text>
+</svg>

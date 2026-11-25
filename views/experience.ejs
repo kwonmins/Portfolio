@@ -1,0 +1,221 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8">
+<style>
+    .project-section {
+      margin-bottom: 50px;
+    }
+    .project-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    .project-duration,
+    .project-funding {
+      font-style: italic;
+      color: gray;
+    }
+    .project-description {
+      margin-top: 15px;
+    }
+
+    .project-images {
+      display: flex;
+      justify-content: center; /* 중앙 정렬 */
+      gap: 15px; /* 이미지 간 간격 */
+    }
+    .project-images .col-md-31 {
+      flex: 1;
+      max-width: 30%; /* 3개 이미지 너비 조절 */
+    }
+  </style>
+<style>
+    .project-images img {
+      width: 100%;
+      height: 200px; /* 원하는 높이로 설정 */
+      object-fit: cover;
+      margin-bottom: 15px; /* 이미지 간격 조절 */
+    }
+    .large-image {
+      width: 90%; /* 전체의 50% 크기로 설정 */
+      height: auto;
+      display: block;
+      margin: 20px auto; /* 위아래 여백 추가 + 가운데 정렬 */
+      border-radius: 5px;
+      box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+<style>
+    /* 프로젝트 섹션 간격 추가 */
+    .project-section {
+      padding: 100px 0; /* 위아래 여백 추가 */
+      border-bottom: 2px solid #e0e0e0; /* 프로젝트 구분선 */
+    }
+
+    /* 프로젝트 설명란 */
+    .project-description {
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-top: 30px;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+<style>
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .tech-stack .stack-label {
+      font-weight: 600;
+      margin-right: 6px;
+    }
+    .tech-stack .tech {
+      width: 50px; height: 50px;
+      object-fit: contain;
+      border-radius: 6px;
+      background: #fff;
+      box-shadow: 0 1px 4px rgba(0,0,0,.08);
+      transition: transform .15s ease, filter .2s ease, box-shadow .2s ease;
+      filter: grayscale(10%);
+    }
+    .tech-stack .tech:hover {
+      transform: translateY(-2px);
+      filter: none;
+      box-shadow: 0 4px 14px rgba(0,0,0,.12);
+    }
+    @media (min-width: 992px) {
+      .tech-stack .tech { width: 50px; height: 50px; }
+    }
+  </style>
+<style>
+    .project-section { margin-bottom: 50px; }
+    .project-title { font-size: 1.5rem; font-weight: bold; }
+    .project-duration, .project-funding { font-style: italic; color: gray; }
+    .project-description { margin-top: 15px; }
+    .project-images { display: flex; justify-content: center; gap: 15px; }
+    .project-images .col-md-31 { flex: 1; max-width: 30%; }
+  </style>
+<style>
+    .project-images img { width: 100%; height: 200px; object-fit: cover; margin-bottom: 15px; }
+    .large-image { width: 45%; height: auto; display: block; margin: 20px auto; border-radius: 5px; box-shadow: 3px 3px 10px rgba(0,0,0,0.2); }
+  </style>
+<style>
+    .project-section { padding: 100px 0; border-bottom: 2px solid #e0e0e0; }
+    .project-description { background: white; padding: 25px; border-radius: 10px; font-size: 1.1rem; line-height: 1.8; margin-top: 30px; box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); }
+  </style>
+<style>
+  .experience-page .experience-heading { font-size: 1.25rem; font-weight: 600; margin-bottom: 16px; }
+  .experience-page .project-description p:last-child { margin-bottom: 0; }
+  .experience-page .experience-diagram { margin: 30px 0; }
+  .experience-page .experience-diagram img { height: auto; max-width: 100%; }
+  .experience-page .experience-diagram figcaption { text-align: center; margin-top: 10px; }
+  .experience-page .tech-stack { line-height: 1.8; overflow-wrap: anywhere; }
+  .experience-page .project-section { scroll-margin-top: 100px; }
+</style></head><body><main class="experience-page">
+<h1 class="text-center mb-4">👨‍💻 실무경험</h1>
+<section class="project-section" id="midas-ot24" aria-labelledby="midas-ot24-title"><h2 class="project-title" id="midas-ot24-title">MIDAS OT24 TAP 임베디드 SW 개발</h2>
+<p class="project-funding">담당 업무: 임베디드 SW 개발 · 포팅 · 패킷 처리 · 제품화</p><div class="tech-stack"><span class="stack-label">기술 스택</span><span>Marvell CPSS SDK · PCL · TCAM · VIDX · CNC · CLI · Makefile</span></div>
+<div class="row mt-3"><div class="col-12"><div class="project-description"><h3 class="experience-heading">프로젝트 소개</h3>
+<p>네트워크 트래픽을 수집하고 지정된 모니터링 포트로 전달하는 MIDAS OT24 TAP 장비의 임베디드 SW를 개발했습니다. 기존 제품의 소프트웨어를 신규 장비의 하드웨어 구성과 고객사 요구사항에 맞게 변경하고, 포트 포워딩 및 패킷 복제 기능부터 트래픽 통계, 장비 설정, 제품별 빌드 구성까지 개발 업무를 수행했습니다.</p>
+</div>
+</div></div>
+<div class="row mt-3"><div class="col-12"><div class="project-description"><h3 class="experience-heading">신규 장비 대응 및 소프트웨어 포팅</h3>
+<p>기존 POE 장비를 기반으로 OT24 제품의 하드웨어 구성에 맞게 소프트웨어를 변경했습니다. 제품 식별 정보와 시스템 포트 구성, 슬롯 구조 및 MPP 설정을 수정하고, 장비의 물리적 포트와 내부 소프트웨어에서 사용하는 포트 번호가 일치하도록 관리 구조를 정비했습니다.</p>
+<p>제품에서 사용하지 않는 웹 서비스와 SNMP 및 관련 CLI 명령을 정리하고, 고객사별 요구사항에 대응하기 위한 빌드 구성을 적용했습니다.</p>
+</div>
+</div></div>
+<div class="row mt-3"><div class="col-12"><div class="project-description"><h3 class="experience-heading">포트 포워딩 및 패킷 복제 기능 개발</h3>
+<p>입력 포트로 수신된 네트워크 트래픽을 하나 이상의 지정된 출력 포트로 전달할 수 있도록 포트 포워딩 기능을 개발했습니다. CLI에서 입력한 설정이 내부 관리 구조와 드라이버를 거쳐 실제 스위칭 ASIC에 반영되도록 기능을 연동했으며, 장비 재부팅 이후에도 설정을 유지할 수 있도록 저장 기능을 구현했습니다.</p>
+<p>마벨 CPSS SDK를 활용하여 PCL과 TCAM으로 패킷 처리 규칙을 구성하고, VIDX를 통해 트래픽이 전달될 출력 포트 그룹을 관리했습니다. 시스템에서 사용하는 포트 번호와 하드웨어 포트 및 규칙 인덱스가 일치하도록 변환 로직을 구성하고, 소스 포트별 포워딩 설정과 상태 정보를 통합하여 관리하도록 구조를 개선했습니다.</p>
+</div>
+<figure class="experience-diagram"><a href="/images/experience/flow-11.svg" target="_blank" rel="noopener" aria-label="포워딩 설정 흐름도 원본 새 탭에서 보기"><img src="/images/experience/flow-11.svg" alt="포워딩 설정 흐름도" class="large-image" loading="lazy" decoding="async"></a><figcaption>포워딩 설정 흐름도 · <a href="/images/experience/flow-11.svg" target="_blank" rel="noopener">원본 보기 (새 탭)</a></figcaption></figure>
+<figure class="experience-diagram"><a href="/images/experience/flow-13.svg" target="_blank" rel="noopener" aria-label="패킷 전달 구성도 원본 새 탭에서 보기"><img src="/images/experience/flow-13.svg" alt="패킷 전달 구성도" class="large-image" loading="lazy" decoding="async"></a><figcaption>패킷 전달 구성도 · <a href="/images/experience/flow-13.svg" target="_blank" rel="noopener">원본 보기 (새 탭)</a></figcaption></figure>
+</div></div>
+<div class="row mt-3"><div class="col-12"><div class="project-description"><h3 class="experience-heading">하드웨어 자원 관리 구조 개선</h3>
+<p>기존에는 포워딩 규칙을 추가할 때마다 TCAM을 구성하는 방식으로 구현했으나, 초기화와 설정 변경 처리를 분리하는 방향으로 구조를 개선했습니다.</p>
+<p>장비 부팅 시 필요한 PCL과 TCAM 규칙을 미리 구성하고, 이후 포워딩 대상이 변경될 때는 VIDX 설정을 갱신하도록 변경했습니다. 이를 통해 규칙 생성 시점과 포트 설정 변경 시의 처리 범위를 명확하게 구분했습니다. 포워딩 관련 상수와 규칙 관리 구조를 정리하여 설정 변경 및 유지보수 과정에서 발생할 수 있는 불일치도 줄이고자 했습니다.</p>
+</div>
+<figure class="experience-diagram"><a href="/images/experience/flow-12.svg" target="_blank" rel="noopener" aria-label="규칙 관리 개선 전후도 원본 새 탭에서 보기"><img src="/images/experience/flow-12.svg" alt="규칙 관리 개선 전후도" class="large-image" loading="lazy" decoding="async"></a><figcaption>규칙 관리 개선 전후도 · <a href="/images/experience/flow-12.svg" target="_blank" rel="noopener">원본 보기 (새 탭)</a></figcaption></figure>
+</div></div>
+<div class="row mt-3"><div class="col-12"><div class="project-description"><h3 class="experience-heading">트래픽 손실 및 하드웨어 카운터 분석</h3>
+<p>입력 트래픽과 출력 트래픽 사이에 차이가 발생하는 현상을 분석하기 위해 ASIC 내부의 버퍼 설정과 포트별 자원 할당, 하드웨어 카운터의 동작을 검토했습니다.</p>
+<p>실제 패킷 손실과 카운터 집계 누락을 구분하기 위해 CNC 기반 Egress Drop 카운터 추가 작업을 수행했습니다. 포트와 카운터의 매핑 관계 및 통계 집계 범위를 점검하고, 카운터 조회 시 값이 초기화되는 특성을 고려하여 측정 결과를 분석했습니다. 또한 트래픽 버퍼 크기와 포트 프로파일 설정을 조정하며 입력량과 출력량, 드롭량의 관계를 확인했습니다.</p>
+</div>
+<figure class="experience-diagram"><a href="/images/experience/flow-14.svg" target="_blank" rel="noopener" aria-label="패킷 드롭 분석 흐름도 원본 새 탭에서 보기"><img src="/images/experience/flow-14.svg" alt="패킷 드롭 분석 흐름도" class="large-image" loading="lazy" decoding="async"></a><figcaption>패킷 드롭 분석 흐름도 · <a href="/images/experience/flow-14.svg" target="_blank" rel="noopener">원본 보기 (새 탭)</a></figcaption></figure>
+</div></div>
+<div class="row mt-3"><div class="col-12"><div class="project-description"><h3 class="experience-heading">운영 지원 및 제품화</h3>
+<p>운영자가 포트별 트래픽 사용률을 확인할 수 있도록 CLI 조회 기능을 구현하고 검증했습니다. 관리 포트의 내부 식별 체계와 CLI 표시 방식을 정비했으며, CLI 세션 타임아웃 및 설정 저장 관련 오류를 개선했습니다.</p>
+<p>고객사별 제품 구성을 지원하기 위해 Makefile의 빌드 대상을 추가하고, 펌웨어와 부트로더 이미지 생성 방식을 제품 요구사항에 맞게 변경했습니다. 하드웨어 초기화와 패킷 처리 기능부터 운영 인터페이스 및 릴리스 구성에 이르기까지 제품 개발의 여러 계층을 경험했습니다.</p>
+</div>
+<figure class="experience-diagram"><a href="/images/experience/flow-15.svg" target="_blank" rel="noopener" aria-label="포트 사용률 조회 흐름도 원본 새 탭에서 보기"><img src="/images/experience/flow-15.svg" alt="포트 사용률 조회 흐름도" class="large-image" loading="lazy" decoding="async"></a><figcaption>포트 사용률 조회 흐름도 · <a href="/images/experience/flow-15.svg" target="_blank" rel="noopener">원본 보기 (새 탭)</a></figcaption></figure>
+<figure class="experience-diagram"><a href="/images/experience/flow-16.svg" target="_blank" rel="noopener" aria-label="제품화 및 릴리스 구성도 원본 새 탭에서 보기"><img src="/images/experience/flow-16.svg" alt="제품화 및 릴리스 구성도" class="large-image" loading="lazy" decoding="async"></a><figcaption>제품화 및 릴리스 구성도 · <a href="/images/experience/flow-16.svg" target="_blank" rel="noopener">원본 보기 (새 탭)</a></figcaption></figure>
+</div></div>
+</section>
+<section class="project-section" id="stm32-utp-tap" aria-labelledby="stm32-utp-tap-title"><h2 class="project-title" id="stm32-utp-tap-title">STM32 기반 4포트 UTP TAP 펌웨어 개발</h2>
+<p class="project-funding">담당 업무: 펌웨어 개발 · PHY 제어 · 링크 감시 · 보드 검증</p><div class="tech-stack"><span class="stack-label">기술 스택</span><span>STM32F217 · RTL8211FS · STM32CubeMX · STM32CubeIDE · MDIO/MDC · GPIO · USART · JTAG</span></div>
+<div class="row mt-3"><div class="col-12"><div class="project-description"><h3 class="experience-heading">프로젝트 소개</h3>
+<p>네트워크 트래픽을 모니터링 장비로 전달하는 4포트 UTP TAP 장비의 펌웨어를 개발했습니다. STM32 MCU를 기반으로 네트워크 포트의 통신 모드를 설정하고, 링크 상태와 속도를 감시하며, 장애 발생 시 반대편 네트워크에 링크 장애를 전달할 수 있도록 하드웨어 제어 및 상태 관리 기능을 구현했습니다.</p>
+</div>
+</div></div>
+<div class="row mt-3"><div class="col-12"><div class="project-description"><h3 class="experience-heading">개발 환경 구축 및 하드웨어 분석</h3>
+<p>기존 Linux 기반 장비와 다른 MCU 개발 환경에서 펌웨어 개발을 담당했습니다. STM32F217 프로세서의 구조와 회로도, PHY 데이터시트 및 기존 베이스 코드를 분석하여 장비의 하드웨어 구성을 파악했습니다. STM32CubeMX를 활용해 GPIO와 Ethernet, USART에 필요한 핀맵을 설정하고, STM32CubeIDE에서 펌웨어를 개발했습니다. JTAG을 통한 펌웨어 업로드 및 콘솔 확인까지 개발 환경을 구축했습니다.</p>
+</div>
+<figure class="experience-diagram"><a href="/images/experience/flow-06.svg" target="_blank" rel="noopener" aria-label="보드 초기화 흐름도 원본 새 탭에서 보기"><img src="/images/experience/flow-06.svg" alt="보드 초기화 흐름도" class="large-image" loading="lazy" decoding="async"></a><figcaption>보드 초기화 흐름도 · <a href="/images/experience/flow-06.svg" target="_blank" rel="noopener">원본 보기 (새 탭)</a></figcaption></figure>
+</div></div>
+<div class="row mt-3"><div class="col-12"><div class="project-description"><h3 class="experience-heading">PHY 및 주변장치 제어</h3>
+<p>4개의 RTL8211FS PHY를 개별적으로 제어하기 위해 MDIO와 MDC를 활용한 레지스터 접근 기능을 구현했습니다. PHY 식별 정보를 확인하고 제어 및 상태 레지스터를 읽거나 수정하여 통신 속도와 자동협상 조건을 설정했습니다.</p>
+<p>물리적인 다이얼 입력값에 따라 10Mbps, 100Mbps, 1Gbps 통신 모드와 자동협상 또는 강제 속도 설정이 적용되도록 구현했습니다. GPIO를 활용해 릴레이를 제어하고, 초기화 순서에 따라 장비가 동작하도록 구성했습니다. PHY의 링크 속도와 장애 상태에 따른 LED 표시 기능도 개발했습니다.</p>
+</div>
+<figure class="experience-diagram"><a href="/images/experience/flow-07.svg" target="_blank" rel="noopener" aria-label="통신 모드 설정도 원본 새 탭에서 보기"><img src="/images/experience/flow-07.svg" alt="통신 모드 설정도" class="large-image" loading="lazy" decoding="async"></a><figcaption>통신 모드 설정도 · <a href="/images/experience/flow-07.svg" target="_blank" rel="noopener">원본 보기 (새 탭)</a></figcaption></figure>
+</div></div>
+<div class="row mt-3"><div class="col-12"><div class="project-description"><h3 class="experience-heading">LLCF 상태 머신 및 링크 감시</h3>
+<p>네트워크 포트의 링크 상태와 통신 속도, Duplex 정보를 주기적으로 수집하고 이를 바탕으로 통신 이상 여부를 판단하는 기능을 개발했습니다.</p>
+<p>한쪽 네트워크의 링크 장애를 반대쪽에도 전달하기 위해 LLCF 기능을 구현했습니다. 복잡한 장애 감지와 복구 과정을 관리하기 위해 동작을 INIT, OK, POLL_A, POLL_B, CHECK의 다섯 가지 상태로 구분했습니다. 각 상태의 전환 조건에 따라 PHY를 활성화하거나 비활성화하고, 장애가 해소되면 복구 조건을 확인한 후 정상 감시 상태로 돌아가도록 설계했습니다.</p>
+</div>
+<figure class="experience-diagram"><a href="/images/experience/flow-08.svg" target="_blank" rel="noopener" aria-label="LLCF 상태 전이도 원본 새 탭에서 보기"><img src="/images/experience/flow-08.svg" alt="LLCF 상태 전이도" class="large-image" loading="lazy" decoding="async"></a><figcaption>LLCF 상태 전이도 · <a href="/images/experience/flow-08.svg" target="_blank" rel="noopener">원본 보기 (새 탭)</a></figcaption></figure>
+</div></div>
+<div class="row mt-3"><div class="col-12"><div class="project-description"><h3 class="experience-heading">하드웨어 디버깅 도구 개발</h3>
+<p>하드웨어의 설정값을 확인하거나 변경할 때마다 펌웨어를 수정하고 다시 빌드해야 하는 불편을 줄이기 위해 USART 기반 디버그 CLI를 개발했습니다. 콘솔에서 PHY 주소와 레지스터 페이지를 지정하여 값을 직접 읽고 쓸 수 있도록 구현했으며, 릴레이를 제어하는 명령도 추가했습니다. 명령어 입력값 검증과 HAL 함수의 실행 결과 확인을 통해 하드웨어 점검 과정에서 발생하는 오류를 확인할 수 있도록 구성했습니다.</p>
+</div>
+<figure class="experience-diagram"><a href="/images/experience/flow-09.svg" target="_blank" rel="noopener" aria-label="디버그 CLI 흐름도 원본 새 탭에서 보기"><img src="/images/experience/flow-09.svg" alt="디버그 CLI 흐름도" class="large-image" loading="lazy" decoding="async"></a><figcaption>디버그 CLI 흐름도 · <a href="/images/experience/flow-09.svg" target="_blank" rel="noopener">원본 보기 (새 탭)</a></figcaption></figure>
+</div></div>
+<div class="row mt-3"><div class="col-12"><div class="project-description"><h3 class="experience-heading">실제 보드 검증 및 문서화</h3>
+<p>실제 UTP TAP 보드와 네트워크 장비를 연결하여 다이얼 모드별 통신 속도, Duplex, 링크 연결 여부 및 LED 동작을 확인했습니다. 양쪽 네트워크의 링크 조건을 변경하면서 LLCF의 장애 전파 및 복구 기능도 검증했습니다. 개발 환경 설정부터 핀맵 구성, 펌웨어 업로드 방법 및 실험 결과까지 문서화하여 이후 개발과 유지보수에 활용할 수 있도록 정리했습니다.</p>
+</div>
+<figure class="experience-diagram"><a href="/images/experience/flow-10.svg" target="_blank" rel="noopener" aria-label="실제 보드 검증 흐름도 원본 새 탭에서 보기"><img src="/images/experience/flow-10.svg" alt="실제 보드 검증 흐름도" class="large-image" loading="lazy" decoding="async"></a><figcaption>실제 보드 검증 흐름도 · <a href="/images/experience/flow-10.svg" target="_blank" rel="noopener">원본 보기 (새 탭)</a></figcaption></figure>
+</div></div>
+</section>
+<section class="project-section" id="cluster-sync" aria-labelledby="cluster-sync-title"><h2 class="project-title" id="cluster-sync-title">바이패스 장비 Cluster Sync 기능 개발</h2>
+<p class="project-funding">담당 업무: 임베디드 Linux 개발 · 장비 간 통신 · 장애 복구 · 운영 인터페이스</p><div class="tech-stack"><span class="stack-label">기술 스택</span><span>C · Embedded Linux · UDP · epoll · eventfd · OpenSSL · AES-128-GCM · CLI · Web GUI</span></div>
+<div class="row mt-3"><div class="col-12"><div class="project-description"><h3 class="experience-heading">프로젝트 소개</h3>
+<p>보안장비에서 장애가 발생했을 때 네트워크 서비스에 미치는 영향을 최소화하기 위해 두 대의 바이패스 장비가 서로의 동작 상태를 공유하고 연동하도록 Cluster Sync 기능을 개발했습니다. 기존 개별 장비 중심의 제어 방식에서 벗어나 상대 장비의 상태와 로컬 장비의 운영 설정을 종합적으로 판단하고, 장애 상황에 따라 적절한 동작을 수행할 수 있도록 구현했습니다.</p>
+</div>
+</div></div>
+<div class="row mt-3"><div class="col-12"><div class="project-description"><h3 class="experience-heading">담당 업무 및 시스템 구현</h3>
+<p>C와 임베디드 Linux 환경에서 장비 간 통신 기능부터 상태 관리, 장애 대응 로직, CLI 및 웹 GUI에 이르는 기능 개발을 담당했습니다. 장비 간 통신은 UDP 논블로킹 방식으로 구성했으며, 소켓과 이벤트 감시에는 epoll을, 설정 변경에 따른 이벤트 통지에는 eventfd를 활용했습니다. 주기적으로 상태 정보를 교환하며 상대 장비의 연결 상태를 확인하고, 마지막 패킷 수신 시각을 기준으로 통신 장애를 판단하도록 구현했습니다. 장비의 식별 정보와 운영 모드, 하트비트 및 인라인 상태를 교환하여 동기화 판단에 활용했습니다.</p>
+</div>
+<figure class="experience-diagram"><a href="/images/experience/flow-01.svg" target="_blank" rel="noopener" aria-label="장비 간 통신 구성도 원본 새 탭에서 보기"><img src="/images/experience/flow-01.svg" alt="장비 간 통신 구성도" class="large-image" loading="lazy" decoding="async"></a><figcaption>장비 간 통신 구성도 · <a href="/images/experience/flow-01.svg" target="_blank" rel="noopener">원본 보기 (새 탭)</a></figcaption></figure>
+</div></div>
+<div class="row mt-3"><div class="col-12"><div class="project-description"><h3 class="experience-heading">상태 관리 및 장애 복구</h3>
+<p>자동 및 반자동 모드에서는 상대 장비의 장애 상태를 반영하고, 수동 모드에서는 운영자가 지정한 설정을 우선하도록 제어 조건을 구성했습니다. 통신이 단절되면 설정된 Timeout과 Fail-Action에 따라 기존 상태를 유지하거나 Inline 또는 Bypass로 전환하도록 구현했습니다.</p>
+<p>장애 대응으로 인해 변경된 상태가 기존 설정을 덮어쓰거나 상대 장비에 다시 전파되는 문제를 개선하기 위해 로컬 설정 상태와 상대 장비의 수신 정보, 실제 적용 상태를 구분하여 관리했습니다. 장애 대응 이전의 상태를 저장하고 복구 조건에 따라 복원하도록 처리했으며, 장비 재부팅과 동기화 해제, 암호화 키 변경 등 정상적인 통신 이외의 상황도 고려했습니다.</p>
+</div>
+<figure class="experience-diagram"><a href="/images/experience/flow-02.svg" target="_blank" rel="noopener" aria-label="모드별 동작 판단도 원본 새 탭에서 보기"><img src="/images/experience/flow-02.svg" alt="모드별 동작 판단도" class="large-image" loading="lazy" decoding="async"></a><figcaption>모드별 동작 판단도 · <a href="/images/experience/flow-02.svg" target="_blank" rel="noopener">원본 보기 (새 탭)</a></figcaption></figure>
+<figure class="experience-diagram"><a href="/images/experience/flow-03.svg" target="_blank" rel="noopener" aria-label="장애 및 복구 흐름도 원본 새 탭에서 보기"><img src="/images/experience/flow-03.svg" alt="장애 및 복구 흐름도" class="large-image" loading="lazy" decoding="async"></a><figcaption>장애 및 복구 흐름도 · <a href="/images/experience/flow-03.svg" target="_blank" rel="noopener">원본 보기 (새 탭)</a></figcaption></figure>
+</div></div>
+<div class="row mt-3"><div class="col-12"><div class="project-description"><h3 class="experience-heading">통신 보안 및 기술 선정</h3>
+<p>장비 간 상태 정보가 평문으로 전송되는 문제를 개선하기 위해 DTLS와 AES-GCM을 각각 구현하고 비교했습니다. 배포 일정과 코드 복잡도, 향후 유지보수성을 고려하여 선임 개발자와 코드 리뷰를 진행했으며, 최종적으로 UDP 통신에 OpenSSL 기반 AES-128-GCM을 적용했습니다.</p>
+<p>패킷마다 Nonce를 생성하고 Header를 AAD로 처리하여 인증 대상에 포함했습니다. 수신 측에서는 등록된 Peer 여부와 패킷의 인증 결과를 확인하고, 정상적으로 인증 및 복호화된 데이터만 장비 상태 정보와 마지막 수신 시각에 반영하도록 구성했습니다.</p>
+</div>
+<figure class="experience-diagram"><a href="/images/experience/flow-04.svg" target="_blank" rel="noopener" aria-label="AES-GCM 송수신 흐름도 원본 새 탭에서 보기"><img src="/images/experience/flow-04.svg" alt="AES-GCM 송수신 흐름도" class="large-image" loading="lazy" decoding="async"></a><figcaption>AES-GCM 송수신 흐름도 · <a href="/images/experience/flow-04.svg" target="_blank" rel="noopener">원본 보기 (새 탭)</a></figcaption></figure>
+</div></div>
+<div class="row mt-3"><div class="col-12"><div class="project-description"><h3 class="experience-heading">운영 지원 및 장애 진단</h3>
+<p>운영자가 장비의 연결 상태와 실제 동작 결과를 확인할 수 있도록 CLI와 웹 GUI를 개발했습니다. 설정 상태와 클러스터에 의한 제어 결과, 실제 장비 동작을 구분하여 표시하고, 연결 단절과 운영 모드 변경 및 장애 대응 이력을 Syslog에 기록하도록 구현했습니다. 또한 제품별 관리 인터페이스에 기능을 반영하고, 설정 방법과 장애 유형별 동작 및 안전한 운영 절차를 문서화했습니다.</p>
+</div>
+<figure class="experience-diagram"><a href="/images/experience/flow-05.svg" target="_blank" rel="noopener" aria-label="운영 정보 전달도 원본 새 탭에서 보기"><img src="/images/experience/flow-05.svg" alt="운영 정보 전달도" class="large-image" loading="lazy" decoding="async"></a><figcaption>운영 정보 전달도 · <a href="/images/experience/flow-05.svg" target="_blank" rel="noopener">원본 보기 (새 탭)</a></figcaption></figure>
+</div></div>
+</section>
+</main></body></html>
