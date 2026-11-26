@@ -9,7 +9,7 @@
 .experience-page .intro{text-align:center;margin:0 0 30px}
 .experience-page .intro h1{font-size:2rem;letter-spacing:-.035em;font-weight:700}
 .experience-page .project{border-radius:10px;background:#fff;padding:20px!important;box-shadow:0 2px 8px #00000006}
-.experience-page .project[aria-selected=true]{background:#f1f2f3;border-color:#aeb5bd;box-shadow:inset 0 3px 0 #626c77}
+.experience-page .project[aria-selected=true]{background:#f1f2f3;border-color:#aeb5bd}
 .experience-page .project strong{font-size:1.2rem}.experience-page .project .type{font-size:13px}
 .experience-page .overview{padding:10px 0 18px;border-top:0}
 .experience-page .work{gap:24px;grid-template-columns:235px minmax(0,1fr);padding-top:24px}
@@ -22,10 +22,8 @@
 .experience-page .modal{margin:auto}.experience-page .modal .stage{padding:24px}
 .experience-page .gallerywrap summary{gap:12px}.experience-page .sitefoot{max-width:1120px;margin:auto;line-height:1.8}
 .experience-page button{transition:background .15s,border-color .15s}.experience-page button:focus-visible{outline:3px solid #007bff;outline-offset:3px}
-.experience-page .intro .intro-label{font-size:13px;letter-spacing:.12em;color:#747b83;margin-bottom:8px}
-.experience-page .intro p{font-size:15px;color:#68717b;margin-top:10px}
 @media(max-width:900px){.experience-page .work{grid-template-columns:195px minmax(0,1fr);gap:16px}.experience-page .content{padding-left:18px}}
-@media(max-width:650px){.experience-page .container{padding:28px 0 40px}.experience-page .intro h1{font-size:1.75rem}.experience-page .intro p{font-size:14px}.experience-page .project{padding:14px!important}.experience-page .work{display:block}.experience-page .side{position:static}.experience-page .content{padding:0;border:0}.experience-page .figure .stage{padding:10px;min-height:150px}.experience-page .topic{scroll-margin-inline:10px}.experience-page .sitefoot{padding:20px 4px}.experience-page .modal{max-width:94vw}.experience-page .data-table{min-width:480px}}
+@media(max-width:650px){.experience-page .container{padding:28px 0 40px}.experience-page .intro h1{font-size:1.75rem}.experience-page .project{padding:14px!important}.experience-page .work{display:block}.experience-page .side{position:static}.experience-page .content{padding:0;border:0}.experience-page .figure .stage{padding:10px;min-height:150px}.experience-page .topic{scroll-margin-inline:10px}.experience-page .sitefoot{padding:20px 4px}.experience-page .modal{max-width:94vw}.experience-page .data-table{min-width:480px}}
 @media(prefers-reduced-motion:reduce){.experience-page *{transition:none!important;scroll-behavior:auto!important}}
 
 .experience-page .modal[open]{display:block;position:fixed;inset:0;height:fit-content;max-height:90vh;z-index:1100;overflow:auto}.experience-page .modal:not([open]){display:none}
