@@ -6,9 +6,34 @@ function setTopic(i){ti=i;fi=0;techIndex=-1;renderOverview();renderTopics();rend
 function selectTech(i){if(techIndex===i){techIndex=-1;renderOverview();renderTopics();renderContent();return}techIndex=i;ti=project().tech[i].topic;fi=0;renderOverview();renderTopics();renderContent()}
 function setFigure(i){fi=i;renderContent()}
 function renderProjects(){$('projects').innerHTML=projects.map((p,i)=>`<button class="project" role="tab" aria-selected="${i===pi}" data-p="${i}"><span class="type">${esc(p.category)}</span><strong>${esc(p.name)}</strong><span class="chev" aria-hidden="true">›</span></button>`).join('');$('projects').querySelectorAll('[data-p]').forEach(b=>b.onclick=()=>setProject(+b.dataset.p))}
-function renderOverview(){let p=project();$('overview').innerHTML=`<div class="techs"><span class="label">기술 스택</span>${p.tech.map((x,i)=>`<button class="chip" data-tech="${i}" aria-pressed="${techIndex===i}">${esc(x.name)}</button>`).join('')}</div>`;$('overview').querySelectorAll('[data-tech]').forEach(b=>b.onclick=()=>selectTech(+b.dataset.tech))}
+function renderOverview() {
+  const current = project();
+  const isWhitebox = current.id === 'whitebox';
+  const technologyChip = (item, index) =>
+    `<button class="chip" data-tech="${index}" aria-pressed="${techIndex === index}">${esc(item.name)}</button>`;
+
+  const commonChips = current.tech.map((item, index) =>
+    !isWhitebox || item.scope === 'common' ? technologyChip(item, index) : ''
+  ).join('');
+  const th2Chips = isWhitebox && current.tech.some(item => item.scope === 'th2' && item.topic === ti)
+    ? '<span class="stack-scope">TH2 전용</span>' + current.tech.map((item, index) =>
+      item.scope === 'th2' ? technologyChip(item, index) : ''
+    ).join('')
+    : '';
+
+  $('overview').innerHTML = `<div class="techs"><span class="label">기술 스택</span>${commonChips}${th2Chips}</div>`;
+  $('overview').querySelectorAll('[data-tech]').forEach(button => {
+    button.onclick = () => selectTech(Number(button.dataset.tech));
+  });
+}
 function renderTopics(){$('topics').innerHTML=project().topics.map((t,i)=>`<button class="topic" role="tab" aria-selected="${i===ti}" data-topic="${i}"><span class="num">${String(i+1).padStart(2,'0')}</span><span>${esc(t.name)}</span><span class="arrow" aria-hidden="true">›</span></button>`).join('');$('topics').querySelectorAll('[data-topic]').forEach(b=>b.onclick=()=>setTopic(+b.dataset.topic))}
-function visual(d,modal=false){if(d.type==='svg')return `<img class="wide" src="${d.src}" alt="${esc(d.title)}" ${modal?'':'data-zoom="'+d.id+'"'}>`;if(d.type==='console')return `<pre class="console">${esc(d.console)}</pre>`;return `<div class="table-wrap"><table class="data-table"><thead><tr>${d.headers.map(h=>`<th scope="col">${esc(h)}</th>`).join('')}</tr></thead><tbody>${d.rows.map(r=>`<tr>${r.map(v=>`<td>${esc(v)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`}
+const portraitFigures = new Set(["utp-01","cluster-04","utp-04"]);
+const wideFigures = new Set(["syrx-dashboard","wb-mode-compare","wb-config-compare","wb-breakout-ui","cluster-config-ui","cluster-dashboard-ui","cluster-status-ui","syrx-web"]);
+function figureClass(id) {
+  if (portraitFigures.has(id)) return 'wide tall-flow flow-' + id;
+  return wideFigures.has(id) ? 'wide dashboard-wide' : 'wide';
+}
+function visual(d,modal=false){if(d.type==='svg')return `<img class="${figureClass(d.id)}" src="${d.src}" alt="${esc(d.title)}" ${modal?'':'data-zoom="'+d.id+'"'}>`;if(d.type==='console')return `<pre class="console">${esc(d.console)}</pre>`;return `<div class="table-wrap"><table class="data-table"><thead><tr>${d.headers.map(h=>`<th scope="col">${esc(h)}</th>`).join('')}</tr></thead><tbody>${d.rows.map(r=>`<tr>${r.map(v=>`<td>${esc(v)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`}
 function renderContent(){let t=topic(),d=diagram();$('content').innerHTML=`<h3>${esc(t.name)}</h3><p class="lead">${esc(t.lead)}</p>${t.body.map(x=>`<p class="bodycopy">${esc(x)}</p>`).join('')}${t.diagrams.length>1?`<div class="figchoices" aria-label="관련 그림">${t.diagrams.map((id,i)=>`<button aria-pressed="${i===fi}" data-fig="${i}">${esc(diagrams[id].title)}</button>`).join('')}</div>`:''}<figure class="figure"><div class="fighead"><h4>${esc(d.title)}</h4><button class="plainbtn" id="zoom">↗ 확대 보기</button></div><div class="stage">${visual(d)}</div>${d.displayNote?`<figcaption class="scope-note">${esc(d.displayNote)}</figcaption>`:''}</figure><div class="below"><div>${ti>0?'<button id="prev" class="plainbtn">← 이전</button> ':''}${ti<project().topics.length-1?'<button id="next" class="plainbtn">다음 →</button>':''}</div></div>`;$('zoom').onclick=()=>showModal(d.id);$('content').querySelectorAll('[data-zoom]').forEach(el=>{el.onclick=()=>showModal(d.id)});$('content').querySelectorAll('[data-fig]').forEach(b=>b.onclick=()=>setFigure(+b.dataset.fig));if($('prev'))$('prev').onclick=()=>setTopic(ti-1);if($('next'))$('next').onclick=()=>setTopic(ti+1)}
 function renderGallery(){const list=Object.values(diagrams).filter(d=>d.group===project().id);$('count').textContent=list.length+'개';$('gallery').innerHTML=list.map(d=>`<button data-gallery="${d.id}"><span class="thumb">${d.type==='svg'?`<img loading="lazy" src="${d.src}" alt="">`:`<span class="mini-label">${d.type==='table'?'검토·검증 표':'콘솔 출력 예시'}</span>`}</span><span class="gtitle">${esc(d.title)}<small>클릭하여 확대</small></span></button>`).join('');$('gallery').querySelectorAll('[data-gallery]').forEach(b=>b.onclick=()=>showModal(b.dataset.gallery))}
 function showModal(id){const d=diagrams[id];modalId=id;$('modalTitle').textContent=d.title;$('modalStage').innerHTML=visual(d,true);$('scopeNote').textContent=d.displayNote||'';$('scopeNote').hidden=!d.displayNote;$('saveSvg').hidden=d.type!=='svg';$('modal').showModal()}
